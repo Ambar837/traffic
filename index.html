@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free Online Security Scan | System Protection Check</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="img/32.png">
     <style>
         :root {
             --mcafee-red: #C8102E;
@@ -41,7 +42,6 @@
             padding: 20px;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Subtle animated background */
@@ -148,13 +148,8 @@
         }
 
         @keyframes pulse-dot {
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.5);
-            }
-            50% {
-                box-shadow: 0 0 0 8px rgba(40, 167, 69, 0);
-            }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.5); }
+            50% { box-shadow: 0 0 0 8px rgba(40, 167, 69, 0); }
         }
 
         .ssl-icon {
@@ -255,8 +250,7 @@
         }
 
         @keyframes scan-pulse {
-            0%,
-            100% {
+            0%, 100% {
                 box-shadow: 0 0 0 0 rgba(0, 120, 212, 0.3);
                 transform: scale(1);
             }
@@ -271,8 +265,31 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 48px;
-            transition: all var(--transition);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s ease;
+        }
+
+        /* Изображение логотипа */
+        .scan-logo-img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Значок предупреждения */
+        .scan-alert-icon {
+            font-size: 56px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .scan-card.active .scan-icon-inner {
+            opacity: 0.65;
         }
 
         .scan-spinner {
@@ -281,8 +298,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
+            width: 70px;
+            height: 70px;
             border: 3px solid #E8E8E8;
             border-top-color: var(--mcafee-blue);
             border-radius: 50%;
@@ -293,15 +310,8 @@
             animation: spin 1s linear infinite;
         }
 
-        .scan-card.active .scan-icon-inner {
-            opacity: 0.5;
-            font-size: 36px;
-        }
-
         @keyframes spin {
-            to {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
         /* Progress bar */
@@ -384,12 +394,8 @@
         }
 
         @keyframes btn-shine {
-            0% {
-                transform: translateX(-100%) rotate(45deg);
-            }
-            100% {
-                transform: translateX(100%) rotate(45deg);
-            }
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
         }
 
         .btn-icon {
@@ -406,14 +412,8 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .results-header {
@@ -455,31 +455,15 @@
             opacity: 0;
         }
 
-        .threat-item:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-        .threat-item:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        .threat-item:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-        .threat-item:nth-child(4) {
-            animation-delay: 0.4s;
-        }
-        .threat-item:nth-child(5) {
-            animation-delay: 0.5s;
-        }
+        .threat-item:nth-child(1) { animation-delay: 0.1s; }
+        .threat-item:nth-child(2) { animation-delay: 0.2s; }
+        .threat-item:nth-child(3) { animation-delay: 0.3s; }
+        .threat-item:nth-child(4) { animation-delay: 0.4s; }
+        .threat-item:nth-child(5) { animation-delay: 0.5s; }
 
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .threat-icon {
@@ -494,18 +478,9 @@
             font-weight: 700;
         }
 
-        .threat-icon.critical {
-            background: #FFE0E0;
-            color: var(--mcafee-red);
-        }
-        .threat-icon.warning {
-            background: #FFF3DC;
-            color: var(--mcafee-orange);
-        }
-        .threat-icon.info {
-            background: #E0EEFF;
-            color: var(--mcafee-blue);
-        }
+        .threat-icon.critical { background: #FFE0E0; color: var(--mcafee-red); }
+        .threat-icon.warning { background: #FFF3DC; color: var(--mcafee-orange); }
+        .threat-icon.info { background: #E0EEFF; color: var(--mcafee-blue); }
 
         .threat-info {
             flex: 1;
@@ -530,18 +505,9 @@
             border-radius: 20px;
             flex-shrink: 0;
         }
-        .severity-high {
-            background: #FFE0E0;
-            color: #C8102E;
-        }
-        .severity-medium {
-            background: #FFF3DC;
-            color: #E67E00;
-        }
-        .severity-low {
-            background: #E0EEFF;
-            color: #005A9E;
-        }
+        .severity-high { background: #FFE0E0; color: #C8102E; }
+        .severity-medium { background: #FFF3DC; color: #E67E00; }
+        .severity-low { background: #E0EEFF; color: #005A9E; }
 
         /* Fix Button */
         .btn-fix {
@@ -571,13 +537,8 @@
         }
 
         @keyframes pulse-btn {
-            0%,
-            100% {
-                box-shadow: 0 6px 24px rgba(200, 16, 46, 0.35);
-            }
-            50% {
-                box-shadow: 0 6px 36px rgba(200, 16, 46, 0.6);
-            }
+            0%, 100% { box-shadow: 0 6px 24px rgba(200, 16, 46, 0.35); }
+            50% { box-shadow: 0 6px 36px rgba(200, 16, 46, 0.6); }
         }
 
         .urgency-text {
@@ -588,9 +549,7 @@
             font-weight: 500;
         }
 
-        .urgency-text strong {
-            color: var(--mcafee-red);
-        }
+        .urgency-text strong { color: var(--mcafee-red); }
 
         /* Footer */
         .footer {
@@ -605,177 +564,140 @@
             gap: 16px;
         }
 
-        .footer span {
-            white-space: nowrap;
-        }
+        .footer span { white-space: nowrap; }
 
         /* Responsive */
         @media (max-width: 600px) {
-            .content {
-                padding: 20px 16px;
-            }
-            .header {
-                padding: 16px 20px;
-                justify-content: center;
-                text-align: center;
-            }
-            .hero-title {
-                font-size: 1.3rem;
-            }
-            .btn-primary {
-                padding: 14px 28px;
-                font-size: 1rem;
-                width: 100%;
-                justify-content: center;
-            }
-            .btn-fix {
-                font-size: 1rem;
-                padding: 16px 20px;
-            }
-            .scan-card {
-                padding: 20px 16px;
-                min-height: 280px;
-            }
-            .scan-animation-area {
-                width: 100px;
-                height: 100px;
-            }
-            .scan-circle {
-                width: 90px;
-                height: 90px;
-            }
-            .scan-icon-inner {
-                font-size: 36px;
-            }
-            .threat-item {
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-            .threat-severity {
-                font-size: 0.65rem;
-                padding: 3px 8px;
-            }
+            .content { padding: 20px 16px; }
+            .header { padding: 16px 20px; justify-content: center; text-align: center; }
+            .hero-title { font-size: 1.3rem; }
+            .btn-primary { padding: 14px 28px; font-size: 1rem; width: 100%; justify-content: center; }
+            .btn-fix { font-size: 1rem; padding: 16px 20px; }
+            .scan-card { padding: 20px 16px; min-height: 280px; }
+            .scan-animation-area { width: 100px; height: 100px; }
+            .scan-circle { width: 90px; height: 90px; }
+            .scan-icon-inner { width: 60px; height: 60px; }
+            .scan-alert-icon { font-size: 40px; }
+            .threat-item { flex-wrap: wrap; gap: 8px; }
+            .threat-severity { font-size: 0.65rem; padding: 3px 8px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="main-container">
-        <!-- Header -->
-        <header class="header">
-            <div class="logo-area">
-                <div class="shield-icon">
-                    <!-- Shield SVG -->
-                    <svg viewBox="0 0 44 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22 0L0 10V24C0 38.5 9.5 50.5 22 52C34.5 50.5 44 38.5 44 24V10L22 0Z" fill="#C8102E"/>
-                        <path d="M22 4L6 12V24C6 35.5 13.5 45 22 46.5C30.5 45 38 35.5 38 24V12L22 4Z" fill="white" fill-opacity="0.9"/>
-                        <path d="M22 10L12 16V24C12 32 17.5 39.5 22 41C26.5 39.5 32 32 32 24V16L22 10Z" fill="#C8102E"/>
-                        <text x="22" y="31" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Arial">M</text>
-                    </svg>
-                </div>
-                <div class="brand-text">
-                    <span class="brand-name">System Security</span>
-                    <span class="brand-tagline">Powered by McAfee&reg;</span>
-                </div>
+<div class="main-container">
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-area">
+            <div class="shield-icon">
+                <!-- Shield SVG -->
+                <svg viewBox="0 0 44 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 0L0 10V24C0 38.5 9.5 50.5 22 52C34.5 50.5 44 38.5 44 24V10L22 0Z" fill="#C8102E"/>
+                    <path d="M22 4L6 12V24C6 35.5 13.5 45 22 46.5C30.5 45 38 35.5 38 24V12L22 4Z" fill="white" fill-opacity="0.9"/>
+                    <path d="M22 10L12 16V24C12 32 17.5 39.5 22 41C26.5 39.5 32 32 32 24V16L22 10Z" fill="#C8102E"/>
+                    <text x="22" y="31" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Arial">M</text>
+                </svg>
             </div>
-            <div class="trust-badges">
-                <span class="trust-badge">
-                    <span class="dot"></span> Secure Connection
-                </span>
-                <span class="trust-badge">
-                    <svg class="ssl-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-                    SSL Encrypted
-                </span>
+            <div class="brand-text">
+                <span class="brand-name">System Security</span>
+                <span class="brand-tagline">Powered by McAfee&reg;</span>
             </div>
-        </header>
+        </div>
+        <div class="trust-badges">
+            <span class="trust-badge"><span class="dot"></span> Secure Connection</span>
+            <span class="trust-badge">
+                <svg class="ssl-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                SSL Encrypted
+            </span>
+        </div>
+    </header>
 
-        <!-- Content -->
-        <div class="content">
-            <!-- Hero -->
-            <div class="hero-section">
-                <h1 class="hero-title">Free Online Security Scan</h1>
-                <p class="hero-subtitle">Check your system for <span class="highlight-red">viruses, malware &amp; outdated drivers</span> — completely free, no installation required.</p>
-            </div>
+    <!-- Content -->
+    <div class="content">
+        <!-- Hero -->
+        <div class="hero-section">
+            <h1 class="hero-title">Free Online Security Scan</h1>
+            <p class="hero-subtitle">Check your system for <span class="highlight-red">viruses, malware &amp; outdated drivers</span> — completely free, no installation required.</p>
+        </div>
 
-            <!-- Scan Card -->
-            <div class="scan-card" id="scanCard">
-                <div class="scan-animation-area">
-                    <div class="scan-circle">
-                        <span class="scan-icon-inner">🛡️</span>
+        <!-- Scan Card -->
+        <div class="scan-card" id="scanCard">
+            <div class="scan-animation-area">
+                <div class="scan-circle">
+                    <div class="scan-icon-inner">
+                        <!-- ЛОГОТИП (замените src на путь к вашей картинке) -->
+                        <img id="scanLogoImg" class="scan-logo-img" src="img/mccc.jpg" alt="McAfee Logo" style="display: block;">
+                        <!-- Иконка предупреждения (показывается после сканирования) -->
+                        <div id="scanAlertIcon" class="scan-alert-icon" style="display: none;">⚠️</div>
                         <div class="scan-spinner"></div>
                     </div>
                 </div>
-                <div class="progress-container">
-                    <div class="progress-bar" id="progressBar"></div>
-                </div>
-                <p class="scan-status-text" id="scanStatus">Ready to scan your device</p>
-                <button class="btn-primary" id="btnStartScan" onclick="startScan()">
-                    <svg class="btn-icon" viewBox="0 0 24 24" fill="white"><circle cx="11" cy="11" r="7" fill="none" stroke="white" stroke-width="2.5"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
-                    Start Free Web Scan
-                </button>
-                <p style="font-size:0.72rem;color:#aaa;margin-top:10px;">No download required &bull; Results in under 60 seconds</p>
             </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <p class="scan-status-text" id="scanStatus">Ready to scan your device</p>
+            <button class="btn-primary" id="btnStartScan">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="white"><circle cx="11" cy="11" r="7" fill="none" stroke="white" stroke-width="2.5"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
+                Start Free Web Scan
+            </button>
+            <p style="font-size:0.72rem;color:#aaa;margin-top:10px;">No download required &bull; Results in under 60 seconds</p>
+        </div>
 
-            <!-- Results Section -->
-            <div class="results-section" id="resultsSection">
-                <div class="results-header">
-                    <div class="results-count" id="threatCount">5</div>
-                    <div class="results-count-label">threats &amp; issues detected</div>
-                </div>
-                <ul class="threat-list" id="threatList">
-                    <li class="threat-item">
-                        <span class="threat-icon critical">!</span>
-                        <div class="threat-info">
-                            <div class="threat-name">Trojan.GenericKD.4738291</div>
-                            <div class="threat-desc">Suspicious behaviour detected in system memory</div>
-                        </div>
-                        <span class="threat-severity severity-high">Critical</span>
-                    </li>
-                    <li class="threat-item">
-                        <span class="threat-icon warning">⚠</span>
-                        <div class="threat-info">
-                            <div class="threat-name">7 Outdated System Drivers</div>
-                            <div class="threat-desc">Network adapter, graphics &amp; audio drivers require updates</div>
-                        </div>
-                        <span class="threat-severity severity-medium">Warning</span>
-                    </li>
-                    <li class="threat-item">
-                        <span class="threat-icon critical">!</span>
-                        <div class="threat-info">
-                            <div class="threat-name">PUP.Optional.Conduit</div>
-                            <div class="threat-desc">Potentially unwanted programme detected in browser extensions</div>
-                        </div>
-                        <span class="threat-severity severity-high">Critical</span>
-                    </li>
-                    <li class="threat-item">
-                        <span class="threat-icon warning">⚠</span>
-                        <div class="threat-info">
-                            <div class="threat-name">Tracking Cookies (17 found)</div>
-                            <div class="threat-desc">Third-party tracking cookies collecting browsing data</div>
-                        </div>
-                        <span class="threat-severity severity-medium">Warning</span>
-                    </li>
-                    <li class="threat-item">
-                        <span class="threat-icon info">i</span>
-                        <div class="threat-info">
-                            <div class="threat-name">Registry Errors Detected</div>
-                            <div class="threat-desc">42 invalid registry entries affecting system performance</div>
-                        </div>
-                        <span class="threat-severity severity-low">Low Risk</span>
-                    </li>
-                </ul>
-                <!-- AFFILIATE LINK - Replace href with your actual affiliate URL -->
-                <a href="https://ahque.com/af?o=14ba5ff6db7753878b09366c71f4b00f:8740eb49ff4a670ad88954583626b2ff&cid=&subid="
-                class="btn-fix"
-                id="btnFix"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Fix all detected issues with McAfee">
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection">
+            <div class="results-header">
+                <div class="results-count" id="threatCount">5</div>
+                <div class="results-count-label">threats &amp; issues detected</div>
+            </div>
+            <ul class="threat-list" id="threatList">
+                <li class="threat-item">
+                    <span class="threat-icon critical">!</span>
+                    <div class="threat-info">
+                        <div class="threat-name">Trojan.GenericKD.4738291</div>
+                        <div class="threat-desc">Suspicious behaviour detected in system memory</div>
+                    </div>
+                    <span class="threat-severity severity-high">Critical</span>
+                </li>
+                <li class="threat-item">
+                    <span class="threat-icon warning">⚠</span>
+                    <div class="threat-info">
+                        <div class="threat-name">7 Outdated System Drivers</div>
+                        <div class="threat-desc">Network adapter, graphics &amp; audio drivers require updates</div>
+                    </div>
+                    <span class="threat-severity severity-medium">Warning</span>
+                </li>
+                <li class="threat-item">
+                    <span class="threat-icon critical">!</span>
+                    <div class="threat-info">
+                        <div class="threat-name">PUP.Optional.Conduit</div>
+                        <div class="threat-desc">Potentially unwanted programme detected in browser extensions</div>
+                    </div>
+                    <span class="threat-severity severity-high">Critical</span>
+                </li>
+                <li class="threat-item">
+                    <span class="threat-icon warning">⚠</span>
+                    <div class="threat-info">
+                        <div class="threat-name">Tracking Cookies (17 found)</div>
+                        <div class="threat-desc">Third-party tracking cookies collecting browsing data</div>
+                    </div>
+                    <span class="threat-severity severity-medium">Warning</span>
+                </li>
+                <li class="threat-item">
+                    <span class="threat-icon info">i</span>
+                    <div class="threat-info">
+                        <div class="threat-name">Registry Errors Detected</div>
+                        <div class="threat-desc">42 invalid registry entries affecting system performance</div>
+                    </div>
+                    <span class="threat-severity severity-low">Low Risk</span>
+                </li>
+            </ul>
+            <!-- AFFILIATE LINK - Replace href with your actual affiliate URL -->
+            <a href="https://ahque.com/af?o=14ba5ff6db7753878b09366c71f4b00f:8740eb49ff4a670ad88954583626b2ff&cid=&subid="
+               class="btn-fix" id="btnFix" target="_blank" rel="noopener noreferrer" title="Fix all detected issues with McAfee">
                 Fix All Issues Now →
             </a>
-            <p class="urgency-text">
-                ⏱ <strong>Limited-time offer:</strong> Protect your device before threats escalate
-            </p>
+            <p class="urgency-text">⏱ <strong>Limited-time offer:</strong> Protect your device before threats escalate</p>
         </div>
     </div>
 
@@ -797,6 +719,10 @@
     const threatCount = document.getElementById('threatCount');
     const btnFix = document.getElementById('btnFix');
 
+    // Элементы иконок внутри сканера
+    const scanLogoImg = document.getElementById('scanLogoImg');
+    const scanAlertIcon = document.getElementById('scanAlertIcon');
+
     // Scan phases
     const scanPhases = [
         { progress: 15, text: 'Initialising secure scan engine...', delay: 600 },
@@ -810,43 +736,38 @@
     ];
 
     function startScan() {
-        // Disable button and update UI
+        // Отключаем кнопку
         btnStartScan.disabled = true;
         btnStartScan.style.pointerEvents = 'none';
         btnStartScan.style.opacity = '0.6';
         btnStartScan.textContent = 'Scanning...';
 
-        // Activate scan card
+        // Сбрасываем состояние: показываем логотип, прячем предупреждение
+        scanLogoImg.style.display = 'block';
+        scanAlertIcon.style.display = 'none';
+
+        // Активируем анимацию сканирования
         scanCard.classList.add('active');
         scanCard.classList.remove('completed');
         resultsSection.style.display = 'none';
         scanStatus.textContent = 'Preparing scan...';
         progressBar.style.width = '0%';
 
-        // Run through phases
         let currentPhase = 0;
 
         function runPhase() {
             if (currentPhase >= scanPhases.length) {
-                // Scan complete
-                setTimeout(() => {
-                    completeScan();
-                }, 500);
+                setTimeout(() => completeScan(), 500);
                 return;
             }
-
             const phase = scanPhases[currentPhase];
             progressBar.style.width = phase.progress + '%';
             scanStatus.textContent = phase.text;
-
             currentPhase++;
             setTimeout(runPhase, phase.delay);
         }
 
-        // Small initial delay before starting
-        setTimeout(() => {
-            runPhase();
-        }, 400);
+        setTimeout(() => runPhase(), 400);
     }
 
     function completeScan() {
@@ -856,31 +777,26 @@
         scanStatus.textContent = '⚠ Scan complete — 5 threats &amp; issues detected on your device';
         btnStartScan.style.display = 'none';
 
-        // Update scan icon area
-        const scanIconInner = scanCard.querySelector('.scan-icon-inner');
-        if (scanIconInner) {
-            scanIconInner.textContent = '⚠';
-            scanIconInner.style.fontSize = '48px';
-        }
+        // Меняем иконку: прячем логотип, показываем предупреждение
+        scanLogoImg.style.display = 'none';
+        scanAlertIcon.style.display = 'flex';
+
+        // Скрываем спиннер (на всякий случай)
         const spinner = scanCard.querySelector('.scan-spinner');
         if (spinner) spinner.style.display = 'none';
 
-        // Show results with animation
+        // Показываем результаты угроз
         resultsSection.style.display = 'block';
         threatCount.textContent = '5';
-
-        // Animate count
         animateCount(threatCount, 0, 5, 800);
 
-        // Reset threat items animation
         const threatItems = document.querySelectorAll('.threat-item');
         threatItems.forEach(item => {
             item.style.animation = 'none';
-            item.offsetHeight; // trigger reflow
+            item.offsetHeight;
             item.style.animation = '';
         });
 
-        // Scroll to results
         setTimeout(() => {
             resultsSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 300);
@@ -888,21 +804,18 @@
 
     function animateCount(element, start, end, duration) {
         const startTime = performance.now();
-
         function update(currentTime) {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
             const value = Math.round(start + (end - start) * eased);
             element.textContent = value;
-            if (progress < 1) {
-                requestAnimationFrame(update);
-            }
+            if (progress < 1) requestAnimationFrame(update);
         }
         requestAnimationFrame(update);
     }
 
-    // Allow resetting the scan (for demo purposes - click the card header area 3 times to reset)
+    // Сброс сканирования (тройной клик по карточке для демо)
     let resetClicks = 0;
     let resetTimer = null;
     scanCard.addEventListener('click', function(e) {
@@ -919,25 +832,25 @@
         }
     });
 
-    function resetScan() {
+        function resetScan() {
         scanCard.classList.remove('active', 'completed');
         progressBar.style.width = '0%';
         scanStatus.textContent = 'Ready to scan your device';
-        btnStartScan.style.display = '';
+        btnStartScan.style.display = 'inline-flex';
         btnStartScan.disabled = false;
         btnStartScan.style.pointerEvents = '';
         btnStartScan.style.opacity = '1';
-        btnStartScan.innerHTML =
-            '<svg class="btn-icon" viewBox="0 0 24 24" fill="white"><circle cx="11" cy="11" r="7" fill="none" stroke="white" stroke-width="2.5"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg> Start Free Web Scan';
+        btnStartScan.innerHTML = '<svg class="btn-icon" viewBox="0 0 24 24" fill="white"><circle cx="11" cy="11" r="7" fill="none" stroke="white" stroke-width="2.5"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg> Start Free Web Scan';
         resultsSection.style.display = 'none';
-        const scanIconInner = scanCard.querySelector('.scan-icon-inner');
-        if (scanIconInner) {
-            scanIconInner.textContent = '🛡️';
-            scanIconInner.style.fontSize = '';
-        }
+        scanLogoImg.style.display = 'block';
+        scanAlertIcon.style.display = 'none';
         const spinner = scanCard.querySelector('.scan-spinner');
         if (spinner) spinner.style.display = 'none';
     }
+
+    // 👇 ДОБАВЬТЕ ЭТУ СТРОКУ
+    btnStartScan.addEventListener('click', startScan);
+</script>
 </script>
 </body>
 </html>
