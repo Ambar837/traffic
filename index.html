@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online Security Scan | System Protection Check</title>
+    <style>
+        :root {
+            --mcafee-red: #C8102E;
+            --mcafee-dark: #1A1A1A;
+            --mcafee-white: #FFFFFF;
+            --mcafee-light-gray: #F5F5F5;
+            --mcafee-border: #E0E0E0;
+            --mcafee-green: #28A745;
+            --mcafee-orange: #F5A623;
+            --mcafee-blue: #0078D4;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.18);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            background: #F0F2F5;
+            color: #1A1A1A;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Subtle animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(200, 16, 46, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(0, 120, 212, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 50%, rgba(245, 166, 35, 0.02) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Main Container */
+        .main-container {
+            width: 100%;
+            max-width: 680px;
+            background: #FFFFFF;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--mcafee-border);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .shield-icon {
+            width: 44px;
+            height: 52px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .shield-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--mcafee-red);
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
+
+        .brand-tagline {
+            font-size: 0.75rem;
+            color: #666;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .trust-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--mcafee-green);
+            flex-shrink: 0;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 0 8px rgba(40, 167, 69, 0);
+            }
+        }
+
+        .ssl-icon {
+            width: 16px;
+            height: 16px;
+            color: #555;
+        }
+
+        /* Content Area */
+        .content {
+            padding: 32px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .hero-title {
+            font-size: 1.65rem;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+        }
+
+        .hero-subtitle {
+            font-size: 0.95rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .highlight-red {
+            color: var(--mcafee-red);
+            font-weight: 600;
+        }
+
+        /* Scan Card */
+        .scan-card {
+            background: var(--mcafee-light-gray);
+            border-radius: var(--radius-md);
+            padding: 28px 24px;
+            text-align: center;
+            border: 2px dashed var(--mcafee-border);
+            transition: all var(--transition);
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scan-card.active {
+            border-color: var(--mcafee-blue);
+            border-style: solid;
+            background: #FAFBFC;
+            box-shadow: var(--shadow-md);
+        }
+
+        .scan-card.completed {
+            border-color: var(--mcafee-red);
+            border-style: solid;
+            background: #FFFBFB;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Scan animation container */
+        .scan-animation-area {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+            flex-shrink: 0;
+        }
+
+        .scan-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #E8E8E8;
+            margin: 10px auto;
+            position: relative;
+            transition: all var(--transition);
+        }
+
+        .scan-card.active .scan-circle {
+            border-color: var(--mcafee-blue);
+            animation: scan-pulse 1.5s infinite;
+        }
+
+        .scan-card.completed .scan-circle {
+            border-color: var(--mcafee-red);
+            animation: none;
+        }
+
+        @keyframes scan-pulse {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 120, 212, 0.3);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 0 25px rgba(0, 120, 212, 0);
+                transform: scale(1.04);
+            }
+        }
+
+        .scan-icon-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            transition: all var(--transition);
+        }
+
+        .scan-spinner {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border: 3px solid #E8E8E8;
+            border-top-color: var(--mcafee-blue);
+            border-radius: 50%;
+        }
+
+        .scan-card.active .scan-spinner {
+            display: block;
+            animation: spin 1s linear infinite;
+        }
+
+        .scan-card.active .scan-icon-inner {
+            opacity: 0.5;
+            font-size: 36px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        /* Progress bar */
+        .progress-container {
+            width: 100%;
+            max-width: 400px;
+            height: 6px;
+            background: #E8E8E8;
+            border-radius: 10px;
+            margin: 16px auto;
+            overflow: hidden;
+            display: none;
+        }
+
+        .scan-card.active .progress-container {
+            display: block;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--mcafee-blue);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+
+        .scan-status-text {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+            min-height: 22px;
+            transition: all var(--transition);
+        }
+
+        /* Primary Button */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #FFFFFF;
+            background: var(--mcafee-red);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            letter-spacing: 0.2px;
+            transition: all var(--transition);
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(200, 16, 46, 0.3);
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .btn-primary:hover {
+            background: #B00D28;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(200, 16, 46, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(200, 16, 46, 0.3);
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent 40%,
+                    rgba(255, 255, 255, 0.15) 50%,
+                    transparent 60%);
+            animation: btn-shine 3s infinite;
+        }
+
+        @keyframes btn-shine {
+            0% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+
+        .btn-icon {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+        /* Results Section */
+        .results-section {
+            display: none;
+            margin-top: 20px;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .results-count {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--mcafee-red);
+            line-height: 1;
+        }
+
+        .results-count-label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .threat-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .threat-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: #FFF5F5;
+            border: 1px solid #FDD;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition);
+            animation: slideIn 0.4s ease forwards;
+            opacity: 0;
+        }
+
+        .threat-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        .threat-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .threat-item:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+        .threat-item:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+        .threat-item:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .threat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            font-weight: 700;
+        }
+
+        .threat-icon.critical {
+            background: #FFE0E0;
+            color: var(--mcafee-red);
+        }
+        .threat-icon.warning {
+            background: #FFF3DC;
+            color: var(--mcafee-orange);
+        }
+        .threat-icon.info {
+            background: #E0EEFF;
+            color: var(--mcafee-blue);
+        }
+
+        .threat-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .threat-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1A1A1A;
+        }
+        .threat-desc {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 2px;
+        }
+        .threat-severity {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            flex-shrink: 0;
+        }
+        .severity-high {
+            background: #FFE0E0;
+            color: #C8102E;
+        }
+        .severity-medium {
+            background: #FFF3DC;
+            color: #E67E00;
+        }
+        .severity-low {
+            background: #E0EEFF;
+            color: #005A9E;
+        }
+
+        /* Fix Button */
+        .btn-fix {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 18px 24px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            background: var(--mcafee-red);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            text-decoration: none;
+            transition: all var(--transition);
+            box-shadow: 0 6px 24px rgba(200, 16, 46, 0.35);
+            animation: pulse-btn 2s infinite;
+        }
+
+        .btn-fix:hover {
+            background: #B00D28;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 32px rgba(200, 16, 46, 0.45);
+            animation: none;
+        }
+
+        @keyframes pulse-btn {
+            0%,
+            100% {
+                box-shadow: 0 6px 24px rgba(200, 16, 46, 0.35);
+            }
+            50% {
+                box-shadow: 0 6px 36px rgba(200, 16, 46, 0.6);
+            }
+        }
+
+        .urgency-text {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        .urgency-text strong {
+            color: var(--mcafee-red);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 16px 32px;
+            border-top: 1px solid var(--mcafee-border);
+            font-size: 0.72rem;
+            color: #999;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .footer span {
+            white-space: nowrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px 16px;
+            }
+            .header {
+                padding: 16px 20px;
+                justify-content: center;
+                text-align: center;
+            }
+            .hero-title {
+                font-size: 1.3rem;
+            }
+            .btn-primary {
+                padding: 14px 28px;
+                font-size: 1rem;
+                width: 100%;
+                justify-content: center;
+            }
+            .btn-fix {
+                font-size: 1rem;
+                padding: 16px 20px;
+            }
+            .scan-card {
+                padding: 20px 16px;
+                min-height: 280px;
+            }
+            .scan-animation-area {
+                width: 100px;
+                height: 100px;
+            }
+            .scan-circle {
+                width: 90px;
+                height: 90px;
+            }
+            .scan-icon-inner {
+                font-size: 36px;
+            }
+            .threat-item {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .threat-severity {
+                font-size: 0.65rem;
+                padding: 3px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-area">
+                <div class="shield-icon">
+                    <!-- Shield SVG -->
+                    <svg viewBox="0 0 44 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 0L0 10V24C0 38.5 9.5 50.5 22 52C34.5 50.5 44 38.5 44 24V10L22 0Z" fill="#C8102E"/>
+                        <path d="M22 4L6 12V24C6 35.5 13.5 45 22 46.5C30.5 45 38 35.5 38 24V12L22 4Z" fill="white" fill-opacity="0.9"/>
+                        <path d="M22 10L12 16V24C12 32 17.5 39.5 22 41C26.5 39.5 32 32 32 24V16L22 10Z" fill="#C8102E"/>
+                        <text x="22" y="31" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Arial">M</text>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">System Security</span>
+                    <span class="brand-tagline">Powered by McAfee&reg;</span>
+                </div>
+            </div>
+            <div class="trust-badges">
+                <span class="trust-badge">
+                    <span class="dot"></span> Secure Connection
+                </span>
+                <span class="trust-badge">
+                    <svg class="ssl-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                    SSL Encrypted
+                </span>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Hero -->
+            <div class="hero-section">
+                <h1 class="hero-title">Free Online Security Scan</h1>
+                <p class="hero-subtitle">Check your system for <span class="highlight-red">viruses, malware &amp; outdated drivers</span> — completely free, no installation required.</p>
+            </div>
+
+            <!-- Scan Card -->
+            <div class="scan-card" id="scanCard">
+                <div class="scan-animation-area">
+                    <div class="scan-circle">
+                        <span class="scan-icon-inner">🛡️</span>
+                        <div class="scan-spinner"></div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <p class="scan-status-text" id="scanStatus">Ready to scan your device</p>
+                <button class="btn-primary" id="btnStartScan" onclick="startScan()">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="white"><circle cx="11" cy="11" r="7" fill="none" stroke="white" stroke-width="2.5"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
+                    Start Free Web Scan
+                </button>
+                <p style="font-size:0.72rem;color:#aaa;margin-top:10px;">No download required &bull; Results in under 60 seconds</p>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection">
+                <div class="results-header">
+                    <div class="results-count" id="threatCount">5</div>
+                    <div class="results-count-label">threats &amp; issues detected</div>
+                </div>
+                <ul class="threat-list" id="threatList">
+                    <li class="threat-item">
+                        <span class="threat-icon critical">!</span>
+                        <div class="threat-info">
+                            <div class="threat-name">Trojan.GenericKD.4738291</div>
+                            <div class="threat-desc">Suspicious behaviour detected in system memory</div>
+                        </div>
+                        <span class="threat-severity severity-high">Critical</span>
+                    </li>
+                    <li class="threat-item">
+                        <span class="threat-icon warning">⚠</span>
+                        <div class="threat-info">
+                            <div class="threat-name">7 Outdated System Drivers</div>
+                            <div class="threat-desc">Network adapter, graphics &amp; audio drivers require updates</div>
+                        </div>
+                        <span class="threat-severity severity-medium">Warning</span>
+                    </li>
+                    <li class="threat-item">
+                        <span class="threat-icon critical">!</span>
+                        <div class="threat-info">
+                            <div class="threat-name">PUP.Optional.Conduit</div>
+                            <div class="threat-desc">Potentially unwanted programme detected in browser extensions</div>
+                        </div>
+                        <span class="threat-severity severity-high">Critical</span>
+                    </li>
+                    <li class="threat-item">
+                        <span class="threat-icon warning">⚠</span>
+                        <div class="threat-info">
+                            <div class="threat-name">Tracking Cookies (17 found)</div>
+                            <div class="threat-desc">Third-party tracking cookies collecting browsing data</div>
+                        </div>
+                        <span class="threat-severity severity-medium">Warning</span>
+                    </li>
+                    <li class="threat-item">
+                        <span class="threat-icon info">i</span>
+                        <div class="threat-info">
+                            <div class="threat-name">Registry Errors Detected</div>
+                            <div class="threat-desc">42 invalid registry entries affecting system performance</div>
+                        </div>
+                        <span class="threat-severity severity-low">Low Risk</span>
+                    </li>
+                </ul>
+                <!-- AFFILIATE LINK - Replace href with your actual affiliate URL -->
+                <a href="https://ahque.com/af?o=14ba5ff6db7753878b09366c71f4b00f:8740eb49ff4a670ad88954583626b2ff&cid=&subid="
+                class="btn-fix"
+                id="btnFix"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Fix all detected issues with McAfee">
+                Fix All Issues Now →
+            </a>
+            <p class="urgency-text">
+                ⏱ <strong>Limited-time offer:</strong> Protect your device before threats escalate
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span>&copy; 2024 System Security Scan</span>
+        <span>Powered by McAfee&reg;</span>
+        <span>Secure SSL Connection</span>
+        <span>UK Data Compliant</span>
+    </div>
+</div>
+
+<script>
+    const scanCard = document.getElementById('scanCard');
+    const btnStartScan = document.getElementById('btnStartScan');
+    const progressBar = document.getElementById('progressBar');
+    const scanStatus = document.getElementById('scanStatus');
+    const resultsSection = document.getElementById('resultsSection');
+    const threatCount = document.getElementById('threatCount');
+    const btnFix = document.getElementById('btnFix');
+
+    // Scan phases
+    const scanPhases = [
+        { progress: 15, text: 'Initialising secure scan engine...', delay: 600 },
+        { progress: 28, text: 'Scanning system memory &amp; processes...', delay: 900 },
+        { progress: 42, text: 'Checking for malware signatures...', delay: 1100 },
+        { progress: 58, text: 'Analysing browser extensions &amp; cookies...', delay: 1000 },
+        { progress: 72, text: 'Scanning device drivers &amp; registry...', delay: 1200 },
+        { progress: 85, text: 'Cross-referencing threat database...', delay: 800 },
+        { progress: 95, text: 'Compiling scan report...', delay: 700 },
+        { progress: 100, text: 'Scan complete — threats detected!', delay: 400 },
+    ];
+
+    function startScan() {
+        // Disable button and update UI
+        btnStartScan.disabled = true;
+        btnStartScan.style.pointerEvents = 'none';
+        btnStartScan.style.opacity = '0.6';
+        btnStartScan.textContent = 'Scanning...';
+
+        // Activate scan card
+        scanCard.classList.add('active');
+        scanCard.classList.remove('completed');
+        resultsSection.style.display = 'none';
+        scanStatus.textContent = 'Preparing scan...';
+        progressBar.style.width = '0%';
+
+        // Run through phases
+        let currentPhase = 0;
+
+        function runPhase() {
+            if (currentPhase >= scanPhases.length) {
+                // Scan complete
+                setTimeout(() => {
+                    completeScan();
+                }, 500);
+                return;
+            }
+
+            const phase = scanPhases[currentPhase];
+            progressBar.style.width = phase.progress + '%';
+            scanStatus.textContent = phase.text;
+
+            currentPhase++;
+            setTimeout(runPhase, phase.delay);
+        }
+
+        // Small initial delay before starting
+        setTimeout(() => {
+            runPhase();
+        }, 400);
+    }
+
+    function completeScan() {
+        scanCard.classList.remove('active');
+        scanCard.classList.add('completed');
+        progressBar.style.width = '100%';
+        scanStatus.textContent = '⚠ Scan complete — 5 threats &amp; issues detected on your device';
+        btnStartScan.style.display = 'none';
+
+        // Update scan icon area
+        const scanIconInner = scanCard.querySelector('.scan-icon-inner');
+        if (scanIconInner) {
+            scanIconInner.textContent = '⚠';
+            scanIconInner.style.fontSize = '48px';
+        }
+        const spinner = scanCard.querySelector('.scan-spinner');
+        if (spinner) spinner.style.display = 'none';
+
+        // Show results with animation
+        resultsSection.style.display = 'block';
+        threatCount.textContent = '5';
+
+        // Animate count
+        animateCount(threatCount, 0, 5, 800);
+
+        // Reset threat items animation
+        const threatItems = document.querySelectorAll('.threat-item');
+        threatItems.forEach(item => {
+            item.style.animation = 'none';
+            item.offsetHeight; // trigger reflow
+            item.style.animation = '';
+        });
+
+        // Scroll to results
+        setTimeout(() => {
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+    }
+
+    function animateCount(element, start, end, duration) {
+        const startTime = performance.now();
+
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+            const value = Math.round(start + (end - start) * eased);
+            element.textContent = value;
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            }
+        }
+        requestAnimationFrame(update);
+    }
+
+    // Allow resetting the scan (for demo purposes - click the card header area 3 times to reset)
+    let resetClicks = 0;
+    let resetTimer = null;
+    scanCard.addEventListener('click', function(e) {
+        if (e.target === btnStartScan || btnStartScan.contains(e.target)) return;
+        if (!scanCard.classList.contains('completed')) return;
+
+        resetClicks++;
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(() => { resetClicks = 0; }, 2000);
+
+        if (resetClicks >= 3) {
+            resetScan();
+            resetClicks = 0;
+        }
+    });
+
+    function resetScan() {
+        scanCard.classList.remove('active', 'completed');
+        progressBar.style.width = '0%';
+        scanStatus.textContent = 'Ready to scan your device';
+        btnStartScan.style.display = '';
+        btnStartScan.disabled = false;
+        btnStartScan.style.pointerEvents = '';
+        btnStartScan.style.opacity = '1';
+        btnStartScan.innerHTML =
+            '<svg class="btn-icon" viewBox="0 0 24 24" fill="white"><circle cx="11" cy="11" r="7" fill="none" stroke="white" stroke-width="2.5"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg> Start Free Web Scan';
+        resultsSection.style.display = 'none';
+        const scanIconInner = scanCard.querySelector('.scan-icon-inner');
+        if (scanIconInner) {
+            scanIconInner.textContent = '🛡️';
+            scanIconInner.style.fontSize = '';
+        }
+        const spinner = scanCard.querySelector('.scan-spinner');
+        if (spinner) spinner.style.display = 'none';
+    }
+</script>
+</body>
+</html>
