@@ -710,8 +710,10 @@ footer a { color: var(--muted); }
     Cada <strong>30 segundos</strong> un usuario pierde archivos, contraseñas o dinero por no tener protección activa. Los ciberdelincuentes no descansan.
   </p>
 
-  <a href="YOUR_AFFILIATE_LINK_HERE" class="btn-main" id="hero-cta"
-     style="display:inline-block;max-width:500px;margin:0 auto;border-radius:12px;text-decoration:none;">
+  <a href="javascript:void(0)" 
+onclick="window.open(decodeURIComponent( window.location.href.substr(window.location.href.lastIndexOf('aref=')+5)), '_self');">
+class="btn-main" id="hero-cta"
+style="display:inline-block;max-width:500px;margin:0 auto;border-radius:12px;text-decoration:none;">
     🛡️ PROTEGERME AHORA — 60% OFF
   </a>
   <p style="margin-top:11px;font-size:0.75rem;color:var(--muted);">✓ Garantía 30 días &nbsp;·&nbsp; Sin riesgo &nbsp;·&nbsp; Descarga inmediata</p>
@@ -832,10 +834,12 @@ footer a { color: var(--muted); }
     </div>
 
     <div class="cta-zone">
-      <a href="YOUR_AFFILIATE_LINK_HERE" class="btn-main" id="main-cta">
+      <a href="javascript:void(0)"
+onclick="window.open(decodeURIComponent( window.location.href.substr(window.location.href.lastIndexOf('aref=')+5)), '_self');"> 
+class="btn-main" id="main-cta">
         🛡️ ACTIVAR PROTECCIÓN — 60% OFF
       </a>
-      <p class="cta-micro">Sin riesgo · Garantía 30 días · Descarga inmediata · <a href="YOUR_AFFILIATE_LINK_HERE">Ver detalles en Avast.com →</a></p>
+      <p class="cta-micro">Sin riesgo · Garantía 30 días · Descarga inmediata · <a href="javascript:void(0)" onclick="window.open(decodeURIComponent( window.location.href.substr(window.location.href.lastIndexOf('aref=')+5)), '_self');"> Ver detalles en Avast.com →</a></p>
     </div>
   </div>
 
@@ -896,7 +900,7 @@ footer a { color: var(--muted); }
       <div class="cd-unit"><div class="cd-n" id="cd-s">59</div><div class="cd-l">SEG</div></div>
     </div>
 
-    <a href="YOUR_AFFILIATE_LINK_HERE" class="btn-main" style="display:block;max-width:480px;margin:0 auto;">
+    <a href="javascript:void(0)" onclick="window.open(decodeURIComponent( window.location.href.substr(window.location.href.lastIndexOf('aref=')+5)), '_self');"> class="btn-main" style="display:block;max-width:480px;margin:0 auto;">
       🛡️ APROVECHAR 60% OFF AHORA
     </a>
     <p style="margin-top:12px;font-size:0.73rem;color:rgba(255,255,255,0.4);">Garantía de devolución 30 días · Sin preguntas</p>
@@ -1161,7 +1165,7 @@ function runQuiz() {
 
   if (score >= 4) {
     el.className = 'danger';
-    el.innerHTML = `🚨 <strong>RIESGO CRÍTICO</strong> — Tienes ${score} de 6 factores de vulnerabilidad activos. Un ataque de ransomware o robo de datos puede ocurrirte <em>en cualquier momento</em>. Actúa ahora antes de que sea tarde. <a href="YOUR_AFFILIATE_LINK_HERE" style="color:#FF8090;font-weight:800;">→ Activar protección con 60% OFF</a>`;
+    el.innerHTML = `🚨 <strong>RIESGO CRÍTICO</strong> — Tienes ${score} de 6 factores de vulnerabilidad activos. Un ataque de ransomware o robo de datos puede ocurrirte <em>en cualquier momento</em>. Actúa ahora antes de que sea tarde. <a href="javascript:void(0)" onclick="window.open(decodeURIComponent( window.location.href.substr(window.location.href.lastIndexOf('aref=')+5)), '_self');"> style="color:#FF8090;font-weight:800;">→ Activar protección con 60% OFF</a>`;
   } else if (score >= 2) {
     el.className = 'warn';
     el.innerHTML = `⚠️ <strong>RIESGO MODERADO-ALTO</strong> — Tienes ${score} factores de exposición. Los ciberdelincuentes buscan exactamente este perfil de usuario desprotegido. Una protección completa puede salvarte de pérdidas graves.`;
