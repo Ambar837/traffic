@@ -821,7 +821,7 @@ footer a { color: var(--muted); }
     <div class="price-strip">
       <div class="price-left">
         <div class="price-was" id="pw">Precio regular: $109.99 USD/año</div>
-        <div class="price-now" id="pn"><sup>$</sup><span id="price-amt">49.99</span></div>
+        <div class="price-now" id="pn"><span id="price-amt">49.99</span></div>
         <div class="price-note" id="price-note">USD por año · menos de $4.20 al mes</div>
         <div class="price-guarantee">✅ Garantía de devolución 30 días sin preguntas</div>
       </div>
@@ -922,7 +922,7 @@ const GEO = {
     flag:      '🇲🇽',
     currency:  'MXN',
     symbol:    '$',
-    rate:      17.23,        // USD → MXN (approximate, update periodically)
+    rate:      17.24,
     riskPct:   92,
     riskLabel: 'Tu país tiene riesgo CRÍTICO',
     riskSub:   'México es el <strong>2.° país más atacado</strong> de América Latina con más de 237,000 intentos de ransomware en los últimos 12 meses.',
@@ -951,14 +951,14 @@ const GEO = {
       { stars:'★★★★★', text:'"Lo uso para toda la familia: mi PC, la laptop de mi esposa y los celulares de mis hijos. Una sola suscripción para todo. El Cleanup también dejó mi computadora muy rápida."', name:'Marco A.', city:'Monterrey', flag:'🇲🇽' },
     ],
     urgencyText: 'El 60% de descuento es una promoción por tiempo muy limitado. Miles de usuarios en México ya activaron su protección. No esperes a ser la próxima víctima.',
-    priceNote: 'al año · menos de ${{monthly}} MXN al mes',
+    priceNote: 'MXN al año · menos de ${{monthly}} MXN al mes',
   },
   CO: {
     country:   'Colombia',
     flag:      '🇨🇴',
     currency:  'COP',
     symbol:    '$',
-    rate:      4100,         // USD → COP (approximate)
+    rate:      3704,
     riskPct:   85,
     riskLabel: 'Tu país tiene riesgo ALTO',
     riskSub:   'Colombia está entre los <strong>5 países más atacados de LATAM</strong> con 35,000+ intentos de ransomware registrados y un crecimiento acelerado del malware corporativo.',
@@ -987,14 +987,14 @@ const GEO = {
       { stars:'★★★★★', text:'"El VPN es lo que más uso, especialmente cuando trabajo desde el café. Saber que mi conexión está cifrada me da muchísima tranquilidad cuando reviso el correo o el banco."', name:'Valentina R.', city:'Cali', flag:'🇨🇴' },
     ],
     urgencyText: 'El 60% de descuento es una oferta por tiempo muy limitado. En Colombia el cibercrimen creció un 30% en 2024. No esperes a ser la próxima víctima.',
-    priceNote: 'al año · menos de ${{monthly}} COP al mes',
+    priceNote: 'COP al año · menos de ${{monthly}} COP al mes',
   },
   AR: {
     country:   'Argentina',
     flag:      '🇦🇷',
-    currency:  'USD',        // ARS is volatile; showing USD is clearer for AR users
-    symbol:    'US$',
-    rate:      1,
+    currency:  'ARS',
+    symbol:    '$',
+    rate:      1389,
     riskPct:   78,
     riskLabel: 'Tu país tiene riesgo ALTO',
     riskSub:   'Argentina ocupa el 3.° lugar en LATAM en ataques cibernéticos, con incidentes de ransomware que robaron hasta <strong>300 GB de datos</strong> en organismos públicos y empresas en 2025.',
@@ -1023,7 +1023,7 @@ const GEO = {
       { stars:'★★★★★', text:'"Mi marido me convenció de comprarlo para toda la familia. Hoy lo tenemos en 4 dispositivos. Me parece muy completo y el precio con el descuento es muy conveniente comparado con lo que podría perder."', name:'Gabriela S.', city:'Rosario', flag:'🇦🇷' },
     ],
     urgencyText: 'El 60% de descuento es una oferta por tiempo limitado. Argentina es uno de los países más atacados de LATAM. No esperes a ser la próxima víctima.',
-    priceNote: 'USD al año · menos de US$4.20 al mes',
+    priceNote: 'ARS al año · menos de ${{monthly}} ARS al mes',
   },
 };
 
@@ -1035,16 +1035,33 @@ const BASE_USD_OLD  = 109.99;
 
 function fmtPrice(usd, geo) {
   const cfg = GEO[geo];
-  if (cfg.currency === 'USD') {
-    return { now: `US$ ${usd.toFixed(2)}`, old: `US$ ${BASE_USD_OLD.toFixed(2)}`, monthly: `US$ ${(usd/12).toFixed(2)}` };
-  }
   const now = Math.round(usd * cfg.rate);
   const old = Math.round(BASE_USD_OLD * cfg.rate);
   const mo  = Math.round((usd * cfg.rate) / 12);
+
+  function fmt(n) {
+    if (cfg.currency === 'COP') {
+      // $199.000 COP — точка как разделитель тысяч
+      return '$' + n.toLocaleString('es-CO').replace(/,/g, '.') + ' COP';
+    }
+    if (cfg.currency === 'ARS') {
+      // $69.450 ARS
+      return '$' + n.toLocaleString('es-AR').replace(/,/g, '.') + ' ARS';
+    }
+    // MXN: $2,099 MXN
+    return '$' + n.toLocaleString('es-MX') + ' MXN';
+  }
+
+  function fmtMonthly(n) {
+    if (cfg.currency === 'COP') return n.toLocaleString('es-CO').replace(/,/g, '.');
+    if (cfg.currency === 'ARS') return n.toLocaleString('es-AR').replace(/,/g, '.');
+    return n.toLocaleString('es-MX');
+  }
+
   return {
-    now: `${cfg.symbol} ${now.toLocaleString('es')}`,
-    old: `${cfg.symbol} ${old.toLocaleString('es')}`,
-    monthly: mo.toLocaleString('es'),
+    now:     fmt(now),
+    old:     fmt(old),
+    monthly: fmtMonthly(mo),
   };
 }
 
@@ -1093,10 +1110,8 @@ function applyGeo(geoKey) {
   ).join('');
 
   // Prices
-  document.getElementById('pw').textContent        = `Precio regular: ${prices.old}/${cfg.currency === 'USD' ? 'year' : 'año'}`;
-  document.getElementById('price-amt').textContent = prices.now.replace(/[^0-9., ]/g, '').trim();
-  // show full now price with symbol correctly
-  document.getElementById('pn').innerHTML = `<sup style="font-size:1.6rem;vertical-align:super;margin-right:3px;">${cfg.symbol}</sup><span id="price-amt">${prices.now.replace(cfg.symbol, '').trim()}</span>`;
+  document.getElementById('pw').textContent = `Precio regular: ${prices.old} / año`;
+  document.getElementById('pn').innerHTML   = `<span id="price-amt">${prices.now}</span>`;
   const noteRaw = cfg.priceNote.replace('{{monthly}}', prices.monthly);
   document.getElementById('price-note').textContent = noteRaw;
 
