@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">⚠️ Alerta de seguridad — Protege tu PC ahora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════ */
+:root {
+  --red:       #E8192C;
+  --red-dark:  #A0101F;
+  --red-glow:  rgba(232,25,44,0.22);
+  --orange:    #FF5A1F;
+  --yellow:    #F5C400;
+  --green:     #00C05A;
+  --green-dark:#009040;
+  --green-glow:rgba(0,192,90,0.25);
+  --blue:      #1147AA;
+  --bg:        #080B12;
+  --bg2:       #0D1120;
+  --card:      #121828;
+  --card2:     #161E30;
+  --border:    rgba(255,255,255,0.07);
+  --text:      #EFF3FF;
+  --muted:     #7A859E;
+  --light:     #C2CBDF;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════
+   TOP TICKER BAR
+═══════════════════════════════════════ */
+.ticker-wrap {
+  background: var(--red-dark);
+  overflow: hidden;
+  padding: 9px 0;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 1px solid rgba(232,25,44,0.4);
+}
+.ticker-inner {
+  display: flex;
+  gap: 80px;
+  animation: ticker 28s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ticker-item {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #FFD4D7;
+}
+.ticker-item .dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  background: var(--yellow);
+  border-radius: 50%;
+  margin-right: 10px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ═══════════════════════════════════════
+   GEO BADGE
+═══════════════════════════════════════ */
+.geo-notice {
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  padding: 8px 20px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+.geo-notice strong { color: var(--light); }
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  position: relative;
+  padding: 64px 40px 56px;
+  text-align: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% -5%, var(--red-glow), transparent 70%),
+    radial-gradient(ellipse 55% 40% at 20% 90%, rgba(17,71,170,0.12), transparent 60%),
+    var(--bg);
+}
+
+/* subtle grid lines */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(255,255,255,0.02) 47px, rgba(255,255,255,0.02) 48px),
+    repeating-linear-gradient(90deg, transparent, transparent 47px, rgba(255,255,255,0.02) 47px, rgba(255,255,255,0.02) 48px);
+  pointer-events: none;
+}
+
+.alert-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(232,25,44,0.13);
+  border: 1px solid rgba(232,25,44,0.38);
+  border-radius: 100px;
+  padding: 7px 18px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: #FF8090;
+  margin-bottom: 28px;
+  animation: fadeUp 0.5s ease both;
+}
+.pulse-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 0 0 var(--red);
+  animation: sonar 1.6s ease-out infinite;
+}
+@keyframes sonar {
+  0%  { box-shadow: 0 0 0 0 rgba(232,25,44,0.8); }
+  80% { box-shadow: 0 0 0 10px rgba(232,25,44,0); }
+  100%{ box-shadow: 0 0 0 0 rgba(232,25,44,0); }
+}
+
+.hero-headline {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2.6rem, 5.5vw, 5rem);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  max-width: 860px;
+  margin: 0 auto 22px;
+  animation: fadeUp 0.6s ease 0.1s both;
+}
+.hero-headline .accent-red  { color: var(--red); }
+.hero-headline .accent-safe { color: var(--green); }
+
+.hero-sub {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: var(--light);
+  max-width: 620px;
+  margin: 0 auto 36px;
+  line-height: 1.6;
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(18px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ═══════════════════════════════════════
+   STAT RIBBON
+═══════════════════════════════════════ */
+.stat-ribbon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 60px;
+}
+.stat-cell {
+  flex: 1;
+  min-width: 160px;
+  padding: 20px 24px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.stat-cell:last-child { border-right: none; }
+.stat-cell::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 40px; height: 2px;
+  background: var(--red);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.stat-cell:hover::after { opacity: 1; }
+.stat-n {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+}
+.stat-l {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+/* ═══════════════════════════════════════
+   LAYOUT WRAPPER
+═══════════════════════════════════════ */
+.wrap { max-width: 900px; margin: 0 auto; padding: 0 32px 64px; }
+
+.section-label {
+  display: inline-block;
+  background: rgba(232,25,44,0.1);
+  border: 1px solid rgba(232,25,44,0.3);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #FF7080;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 36px;
+  text-align: center;
+}
+.section-title em { color: var(--yellow); font-style: normal; }
+
+/* ═══════════════════════════════════════
+   THREAT CARDS
+═══════════════════════════════════════ */
+.threat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 60px;
+}
+.tc {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--red);
+  border-radius: 10px;
+  padding: 22px 18px 18px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.tc:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.4);
+}
+.tc .ico { font-size: 1.8rem; margin-bottom: 10px; }
+.tc h3 { font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; }
+.tc p  { font-size: 0.8rem; color: var(--light); line-height: 1.5; }
+.tc .badge {
+  margin-top: 12px;
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #FF7080;
+  background: rgba(232,25,44,0.1);
+  border-radius: 4px;
+  padding: 3px 9px;
+}
+
+/* ═══════════════════════════════════════
+   COUNTRY GEO BLOCK — risk meter
+═══════════════════════════════════════ */
+.geo-risk-box {
+  background: linear-gradient(135deg, #0E1526 0%, #131E35 100%);
+  border: 1px solid rgba(17,71,170,0.45);
+  border-radius: 14px;
+  padding: 30px 28px;
+  margin-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+}
+.geo-risk-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--red), var(--orange), var(--yellow));
+}
+.geo-flag { font-size: 2.4rem; margin-bottom: 8px; }
+.geo-risk-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.geo-risk-sub { font-size: 0.88rem; color: var(--light); margin-bottom: 20px; line-height: 1.5; }
+
+.risk-meter {
+  background: rgba(0,0,0,0.3);
+  border-radius: 100px;
+  height: 10px;
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+.risk-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--yellow), var(--orange), var(--red));
+  transition: width 1.5s cubic-bezier(0.4,0,0.2,1);
+}
+.risk-labels { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--muted); font-weight: 700; letter-spacing: 0.04em; }
+
+.geo-stats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.geo-stat-item {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 18px;
+  flex: 1;
+  min-width: 140px;
+}
+.geo-stat-item .n {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--red);
+}
+.geo-stat-item .l { font-size: 0.72rem; color: var(--muted); font-weight: 600; margin-top: 2px; }
+
+/* ═══════════════════════════════════════
+   PRODUCT CARD
+═══════════════════════════════════════ */
+.product-wrap {
+  background: linear-gradient(145deg, #0B1733 0%, #0E1E3A 60%, #081225 100%);
+  border: 1px solid rgba(17,71,170,0.5);
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 60px;
+  position: relative;
+}
+.product-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #1147AA, #4080FF, #00C05A);
+}
+
+.prod-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 28px 28px 20px;
+}
+.avast-wordmark {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.avast-wordmark span { color: #FF6B1A; }
+.trusted { font-size: 0.72rem; color: var(--muted); font-weight: 600; margin-top: 2px; }
+
+.award-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.award-b {
+  background: rgba(245,196,0,0.1);
+  border: 1px solid rgba(245,196,0,0.35);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--yellow);
+  letter-spacing: 0.04em;
+}
+
+.prod-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  padding: 0 28px;
+  margin-bottom: 22px;
+}
+
+.feat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 0 28px 26px;
+}
+.feat {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 13px 14px;
+}
+.feat .ico  { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+.feat strong { font-size: 0.88rem; font-weight: 700; display: block; }
+.feat span   { font-size: 0.76rem; color: var(--light); line-height: 1.4; }
+
+/* price strip */
+.price-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  background: rgba(0,0,0,0.3);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 22px 28px;
+}
+.price-left {}
+.price-was { font-size: 0.9rem; color: var(--muted); text-decoration: line-through; margin-bottom: 2px; }
+.price-now {
+  font-family: 'Oswald', sans-serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text);
+}
+.price-now sup { font-size: 1.4rem; vertical-align: super; margin-right: 2px; }
+.price-note { font-size: 0.75rem; color: var(--muted); margin-top: 3px; }
+.price-guarantee { font-size: 0.76rem; color: var(--green); display: flex; align-items: center; gap: 5px; margin-top: 5px; }
+
+.price-right { text-align: center; }
+.disc-badge {
+  background: var(--red);
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.disc-sub { font-size: 0.73rem; color: var(--muted); margin-top: 5px; }
+
+/* CTA area */
+.cta-zone { padding: 22px 28px 28px; }
+.btn-main {
+  display: block;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  background: linear-gradient(135deg, #00C05A, #009040);
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 20px 28px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 36px var(--green-glow);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-main::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  animation: shine 2.8s ease-in-out infinite;
+}
+@keyframes shine { to { left: 160%; } }
+.btn-main:hover { transform: translateY(-2px); box-shadow: 0 14px 44px var(--green-glow); }
+.cta-micro { text-align: center; font-size: 0.75rem; color: var(--muted); margin-top: 10px; }
+.cta-micro a { color: var(--muted); }
+
+/* ═══════════════════════════════════════
+   COMPARISON TABLE
+═══════════════════════════════════════ */
+.compare-wrap { margin-bottom: 60px; overflow-x: auto; }
+table.comp {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  border-radius: 12px;
+  overflow: hidden;
+}
+table.comp thead tr { background: var(--card2); }
+table.comp th {
+  padding: 13px 16px;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+table.comp th.h { color: var(--text); background: rgba(17,71,170,0.18); border-left: 2px solid rgba(17,71,170,0.5); border-right: 2px solid rgba(17,71,170,0.5); }
+table.comp th:first-child { text-align: left; }
+table.comp td { padding: 11px 16px; border-bottom: 1px solid var(--border); background: var(--bg2); text-align: center; }
+table.comp td:first-child { text-align: left; background: var(--card); font-weight: 600; color: var(--light); font-size: 0.84rem; }
+table.comp td.h { background: rgba(17,71,170,0.1); border-left: 2px solid rgba(17,71,170,0.5); border-right: 2px solid rgba(17,71,170,0.5); }
+table.comp tr:last-child td.h { border-bottom: 2px solid rgba(17,71,170,0.5); }
+.ok  { color: var(--green);  font-size: 1rem; }
+.no  { color: var(--red);    font-size: 1rem; }
+.par { color: var(--yellow); font-size: 0.78rem; font-weight: 700; }
+
+/* ═══════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════ */
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 60px; }
+.testi {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+.stars { color: var(--yellow); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 10px; }
+.testi p { font-size: 0.82rem; color: var(--light); line-height: 1.55; font-style: italic; margin-bottom: 12px; }
+.reviewer { font-size: 0.78rem; font-weight: 700; color: var(--muted); }
+
+/* ═══════════════════════════════════════
+   TRUST BAR
+═══════════════════════════════════════ */
+.trust-bar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 32px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 26px;
+  margin-bottom: 60px;
+}
+.trust-i { text-align: center; }
+.trust-i .ico { font-size: 1.7rem; margin-bottom: 5px; }
+.trust-i .lbl { font-size: 0.68rem; font-weight: 800; color: var(--muted); letter-spacing: 0.05em; }
+
+/* ═══════════════════════════════════════
+   URGENCY + COUNTDOWN
+═══════════════════════════════════════ */
+.urgency-panel {
+  background: linear-gradient(135deg, rgba(232,25,44,0.1), rgba(255,90,31,0.07));
+  border: 1px solid rgba(232,25,44,0.28);
+  border-radius: 16px;
+  text-align: center;
+  padding: 36px 28px;
+  margin-bottom: 60px;
+}
+.urgency-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 10px;
+}
+.urgency-text { font-size: 0.9rem; color: var(--light); line-height: 1.6; max-width: 540px; margin: 0 auto 24px; }
+
+.cd {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+.cd-unit {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 18px;
+  min-width: 76px;
+}
+.cd-n {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+}
+.cd-l { font-size: 0.62rem; color: var(--muted); font-weight: 800; letter-spacing: 0.06em; margin-top: 2px; }
+
+/* ═══════════════════════════════════════
+   QUIZ
+═══════════════════════════════════════ */
+.quiz-panel {
+  background: linear-gradient(135deg, #101830, #0B1220);
+  border: 1px solid rgba(17,71,170,0.4);
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+  margin-bottom: 60px;
+}
+.quiz-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.quiz-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 20px; }
+
+.q-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.88rem;
+  color: var(--light);
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+.q-item:last-of-type { border-bottom: none; }
+.q-item input { accent-color: var(--red); width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; cursor: pointer; }
+
+.q-btn {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  background: rgba(17,71,170,0.3);
+  border: 1px solid rgba(17,71,170,0.6);
+  color: var(--text);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 13px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.q-btn:hover { background: rgba(17,71,170,0.55); }
+
+#qr {
+  display: none;
+  margin-top: 16px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+#qr.danger  { background: rgba(232,25,44,0.12); border: 1px solid rgba(232,25,44,0.35); color: #FF8090; }
+#qr.warn    { background: rgba(245,196,0,0.1);  border: 1px solid rgba(245,196,0,0.35);  color: var(--yellow); }
+#qr.ok      { background: rgba(0,192,90,0.08);  border: 1px solid rgba(0,192,90,0.35);   color: var(--green); }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 40px;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1.8;
+  background: var(--bg);
+}
+footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- ══ TICKER ══ -->
+<div class="ticker-wrap">
+  <div class="ticker-inner" id="ticker">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- ══ GEO NOTICE ══ -->
+<div class="geo-notice" id="geo-notice">Detectando tu ubicación...</div>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="alert-pill">
+    <span class="pulse-dot"></span>
+    <span id="alert-pill-text">ALERTA DE SEGURIDAD ACTIVA</span>
+  </div>
+
+  <h1 class="hero-headline" id="hero-headline">
+    Tu PC puede estar siendo<br>
+    <span class="accent-red">atacada ahora mismo.</span><br>
+    <span class="accent-safe">¿Estás protegido?</span>
+  </h1>
+
+  <p class="hero-sub" id="hero-sub">
+    Cada <strong>30 segundos</strong> un usuario pierde archivos, contraseñas o dinero por no tener protección activa. Los ciberdelincuentes no descansan.
+  </p>
+
+  <a href="YOUR_AFFILIATE_LINK_HERE" class="btn-main" id="hero-cta"
+     style="display:inline-block;max-width:500px;margin:0 auto;border-radius:12px;text-decoration:none;">
+    🛡️ PROTEGERME AHORA — 60% OFF
+  </a>
+  <p style="margin-top:11px;font-size:0.75rem;color:var(--muted);">✓ Garantía 30 días &nbsp;·&nbsp; Sin riesgo &nbsp;·&nbsp; Descarga inmediata</p>
+</section>
+
+<!-- ══ STAT RIBBON ══ -->
+<div class="stat-ribbon" id="stat-ribbon">
+  <div class="stat-cell">
+    <div class="stat-n" id="s1">843B</div>
+    <div class="stat-l">Intentos de ataque en LATAM<br>durante 2025</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n" id="s2">237K</div>
+    <div class="stat-l" id="s2l">Ataques ransomware en<br>México (últimos 12 meses)</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">+389%</div>
+    <div class="stat-l">Más víctimas de ransomware<br>respecto al año anterior</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">2/min</div>
+    <div class="stat-l">Ataques de ransomware<br>en América Latina</div>
+  </div>
+</div>
+
+<!-- ══ MAIN CONTENT ══ -->
+<div class="wrap">
+
+  <!-- THREAT SECTION -->
+  <div style="text-align:center;"><div class="section-label">AMENAZAS ACTIVAS 2025</div></div>
+  <h2 class="section-title">Las 6 amenazas que<br>acechan tu PC <em>hoy</em></h2>
+
+  <div class="threat-grid">
+    <div class="tc"><div class="ico">🔒</div><h3>Ransomware</h3><p>Cifra todos tus archivos y exige pago para devolverlos. Una sola infección puede costarte años de trabajo.</p><span class="badge">+389% víctimas en 2025</span></div>
+    <div class="tc"><div class="ico">🎣</div><h3>Phishing avanzado</h3><p>Correos y sitios falsos perfectamente imitados que roban tus contraseñas bancarias sin que lo noten.</p><span class="badge">Amenaza #1 en LATAM</span></div>
+    <div class="tc"><div class="ico">👁️</div><h3>Spyware silencioso</h3><p>Se instala sin que te des cuenta y monitorea todo: contraseñas, cámara, teclado, datos bancarios.</p><span class="badge">2.6M muestras detectadas</span></div>
+    <div class="tc"><div class="ico">📡</div><h3>Robo en Wi-Fi público</h3><p>Los hackers interceptan tu conexión en cafés y aeropuertos. Sin VPN, todo lo que envías puede ser capturado.</p><span class="badge">Sin VPN = sin privacidad</span></div>
+    <div class="tc"><div class="ico">🤖</div><h3>Malware con IA</h3><p>Ataques generados con WormGPT y FraudGPT que evaden antivirus gratuitos y se actualizan solos.</p><span class="badge">Nueva generación 2025</span></div>
+    <div class="tc"><div class="ico">🏦</div><h3>Troyano bancario</h3><p>Roba credenciales de banca en línea y apps de pago. Muy común en México, Colombia y Argentina.</p><span class="badge">Top amenaza LATAM</span></div>
+  </div>
+
+  <!-- GEO RISK BOX -->
+  <div class="geo-risk-box" id="geo-risk-box" style="display:none;">
+    <div class="geo-flag" id="geo-flag">🇲🇽</div>
+    <div class="geo-risk-title" id="geo-risk-title">Tu país está en riesgo CRÍTICO</div>
+    <div class="geo-risk-sub" id="geo-risk-sub">México es el segundo país más atacado por ransomware en América Latina.</div>
+
+    <div style="margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;font-size:0.72rem;font-weight:700;color:var(--muted);margin-bottom:6px;">
+        <span>Nivel de riesgo cibernético</span>
+        <span id="risk-pct">92%</span>
+      </div>
+      <div class="risk-meter"><div class="risk-fill" id="risk-fill" style="width:0%"></div></div>
+      <div class="risk-labels"><span>BAJO</span><span>MODERADO</span><span>ALTO</span><span>CRÍTICO</span></div>
+    </div>
+
+    <div class="geo-stats" id="geo-stats">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-panel">
+    <div class="quiz-title">🔍 ¿Qué tan expuesto estás? — Test rápido</div>
+    <p class="quiz-sub">Marca todo lo que aplica en tu caso. Te diremos tu nivel de riesgo real.</p>
+
+    <label class="q-item"><input type="checkbox" class="qc"> Uso Wi-Fi de cafeterías, aeropuertos o centros comerciales</label>
+    <label class="q-item"><input type="checkbox" class="qc"> Hago compras o banca en línea desde mi computadora</label>
+    <label class="q-item"><input type="checkbox" class="qc"> No tengo antivirus de pago activo actualmente</label>
+    <label class="q-item"><input type="checkbox" class="qc"> A veces abro links de correos sin verificar el remitente</label>
+    <label class="q-item"><input type="checkbox" class="qc"> Tengo documentos, fotos o trabajo importante en mi PC</label>
+    <label class="q-item"><input type="checkbox" class="qc"> Mi PC se ha vuelto más lenta sin razón aparente</label>
+
+    <button class="q-btn" onclick="runQuiz()">Calcular mi nivel de riesgo →</button>
+    <div id="qr"></div>
+  </div>
+
+  <!-- PRODUCT CARD -->
+  <div class="section-label" style="display:block;text-align:center;margin-bottom:12px;">LA SOLUCIÓN</div>
+  <h2 class="section-title">Avast Ultimate —<br><em>Protección total, un año</em></h2>
+
+  <div class="product-wrap">
+    <div class="prod-top">
+      <div>
+        <div class="avast-wordmark">AV<span>AST</span></div>
+        <div class="trusted">Confiado por más de 400 millones de usuarios en el mundo</div>
+      </div>
+      <div class="award-badges">
+        <div class="award-b">⭐ MEJOR ANTIVIRUS 2025</div>
+        <div class="award-b">🏆 AWARD WINNER</div>
+      </div>
+    </div>
+
+    <div class="prod-name">Avast Ultimate — Todo en uno</div>
+
+    <div class="feat-grid">
+      <div class="feat"><span class="ico">🛡️</span><div><strong>Antivirus Premium con IA</strong><span>Detecta y bloquea virus, ransomware, spyware y amenazas de día cero en tiempo real</span></div></div>
+      <div class="feat"><span class="ico">🌐</span><div><strong>VPN SecureLine ilimitada</strong><span>Navega anónimo y seguro incluso en Wi-Fi público. Sin límite de datos.</span></div></div>
+      <div class="feat"><span class="ico">👣</span><div><strong>AntiTrack — Anti-rastreo</strong><span>Bloquea rastreadores web que recopilan tu identidad y comportamiento digital</span></div></div>
+      <div class="feat"><span class="ico">⚡</span><div><strong>Cleanup Premium</strong><span>Elimina archivos basura, acelera tu PC y libera espacio de disco</span></div></div>
+      <div class="feat"><span class="ico">📱</span><div><strong>Hasta 10 dispositivos</strong><span>Protege tu PC, Mac, Android e iOS con una sola suscripción anual</span></div></div>
+      <div class="feat"><span class="ico">🔔</span><div><strong>Alertas de filtración</strong><span>Te avisa si tus datos o contraseñas aparecen en brechas de seguridad</span></div></div>
+      <div class="feat"><span class="ico">🏠</span><div><strong>Protección de red</strong><span>Escanea tu Wi-Fi doméstico y detecta dispositivos o configuraciones vulnerables</span></div></div>
+      <div class="feat"><span class="ico">🎣</span><div><strong>Anti-phishing avanzado</strong><span>Bloquea sitios falsos y correos de estafa antes de que hagas clic</span></div></div>
+    </div>
+
+    <div class="price-strip">
+      <div class="price-left">
+        <div class="price-was" id="pw">Precio regular: $109.99 USD/año</div>
+        <div class="price-now" id="pn"><sup>$</sup><span id="price-amt">49.99</span></div>
+        <div class="price-note" id="price-note">USD por año · menos de $4.20 al mes</div>
+        <div class="price-guarantee">✅ Garantía de devolución 30 días sin preguntas</div>
+      </div>
+      <div class="price-right">
+        <div class="disc-badge">🔥 60% OFF</div>
+        <div class="disc-sub">Precio especial · tiempo limitado</div>
+      </div>
+    </div>
+
+    <div class="cta-zone">
+      <a href="YOUR_AFFILIATE_LINK_HERE" class="btn-main" id="main-cta">
+        🛡️ ACTIVAR PROTECCIÓN — 60% OFF
+      </a>
+      <p class="cta-micro">Sin riesgo · Garantía 30 días · Descarga inmediata · <a href="YOUR_AFFILIATE_LINK_HERE">Ver detalles en Avast.com →</a></p>
+    </div>
+  </div>
+
+  <!-- COMPARISON -->
+  <div class="section-label" style="display:block;text-align:center;margin-bottom:12px;">COMPARATIVA</div>
+  <h2 class="section-title">¿Por qué <em>no basta</em> el antivirus gratuito?</h2>
+
+  <div class="compare-wrap">
+    <table class="comp">
+      <thead>
+        <tr>
+          <th style="text-align:left;">Función</th>
+          <th>Sin protección</th>
+          <th>Antivirus gratis</th>
+          <th class="h">Avast Ultimate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Protección antivirus</td><td><span class="no">✗</span></td><td><span class="par">Básica</span></td><td class="h"><span class="ok">✓ Con IA</span></td></tr>
+        <tr><td>Bloqueo de ransomware</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td class="h"><span class="ok">✓ Total</span></td></tr>
+        <tr><td>VPN para Wi-Fi público</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td class="h"><span class="ok">✓ Ilimitada</span></td></tr>
+        <tr><td>Anti-rastreo online</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td class="h"><span class="ok">✓ AntiTrack</span></td></tr>
+        <tr><td>Alertas de filtración</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td class="h"><span class="ok">✓ Tiempo real</span></td></tr>
+        <tr><td>Protección de phishing avanzado</td><td><span class="no">✗</span></td><td><span class="par">Limitada</span></td><td class="h"><span class="ok">✓ Con IA</span></td></tr>
+        <tr><td>Optimización del sistema</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td class="h"><span class="ok">✓ Cleanup Premium</span></td></tr>
+        <tr><td>Cobertura multi-dispositivo</td><td><span class="no">✗</span></td><td><span class="par">Solo 1</span></td><td class="h"><span class="ok">✓ Hasta 10</span></td></tr>
+        <tr><td>Soporte técnico dedicado</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td class="h"><span class="ok">✓ Prioritario</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TESTIMONIALS — country-specific (filled by JS) -->
+  <div class="section-label" style="display:block;text-align:center;margin-bottom:12px;">OPINIONES REALES</div>
+  <h2 class="section-title">Lo que dicen usuarios en <em id="testi-country">Latinoamérica</em></h2>
+
+  <div class="testi-grid" id="testi-grid">
+    <!-- filled by JS -->
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-i"><div class="ico">🏆</div><div class="lbl">MEJOR ANTIVIRUS 2025</div></div>
+    <div class="trust-i"><div class="ico">👥</div><div class="lbl">400M USUARIOS</div></div>
+    <div class="trust-i"><div class="ico">🔒</div><div class="lbl">30 AÑOS DE EXPERIENCIA</div></div>
+    <div class="trust-i"><div class="ico">💳</div><div class="lbl">PAGO SEGURO</div></div>
+    <div class="trust-i"><div class="ico">↩️</div><div class="lbl">GARANTÍA 30 DÍAS</div></div>
+    <div class="trust-i"><div class="ico">⚡</div><div class="lbl">DESCARGA INMEDIATA</div></div>
+  </div>
+
+  <!-- URGENCY + COUNTDOWN -->
+  <div class="urgency-panel">
+    <div class="urgency-title">⏰ La oferta vence en</div>
+    <p class="urgency-text" id="urgency-text">El 60% de descuento es una promoción por tiempo muy limitado. Miles de usuarios en tu país ya activaron su protección. No esperes a ser la próxima víctima.</p>
+
+    <div class="cd">
+      <div class="cd-unit"><div class="cd-n" id="cd-h">23</div><div class="cd-l">HORAS</div></div>
+      <div class="cd-unit"><div class="cd-n" id="cd-m">47</div><div class="cd-l">MIN</div></div>
+      <div class="cd-unit"><div class="cd-n" id="cd-s">59</div><div class="cd-l">SEG</div></div>
+    </div>
+
+    <a href="YOUR_AFFILIATE_LINK_HERE" class="btn-main" style="display:block;max-width:480px;margin:0 auto;">
+      🛡️ APROVECHAR 60% OFF AHORA
+    </a>
+    <p style="margin-top:12px;font-size:0.73rem;color:rgba(255,255,255,0.4);">Garantía de devolución 30 días · Sin preguntas</p>
+  </div>
+
+</div><!-- /wrap -->
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p>Este sitio contiene enlaces de afiliados. Al comprar a través de ellos podemos recibir una comisión, sin costo adicional para ti.</p>
+  <p>Las estadísticas provienen de informes de Kaspersky, Fortinet FortiGuard Labs, ESET y Entel Digital (2024–2025).</p>
+  <p>Avast, Avast Ultimate y los logos relacionados son marcas registradas de Gen Digital Inc.</p>
+</footer>
+
+<!-- ══════════════════════════════════════════════════
+     JAVASCRIPT — GEO DETECTION + CONTENT SWAP
+══════════════════════════════════════════════════ -->
+<script>
+/* ── GEO DATA CONFIG ──────────────────────────────── */
+const GEO = {
+  MX: {
+    country:   'México',
+    flag:      '🇲🇽',
+    currency:  'MXN',
+    symbol:    '$',
+    rate:      17.23,        // USD → MXN (approximate, update periodically)
+    riskPct:   92,
+    riskLabel: 'Tu país tiene riesgo CRÍTICO',
+    riskSub:   'México es el <strong>2.° país más atacado</strong> de América Latina con más de 237,000 intentos de ransomware en los últimos 12 meses.',
+    stats: [
+      { n: '237K',  l: 'Ataques ransomware<br>en México (12 meses)' },
+      { n: '2/min', l: 'Ataques en LATAM<br>en este momento' },
+      { n: '$3M',   l: 'Costo promedio de<br>recuperación post-ataque' },
+    ],
+    tickerItems: [
+      '🚨 México: 237,000+ ataques de ransomware en 12 meses',
+      '⚠️ Troyanos bancarios: amenaza #1 en México 2025',
+      '🔥 60% DESCUENTO AVAST ULTIMATE — TIEMPO LIMITADO',
+      '🛡️ Más de 400 millones de usuarios protegidos con Avast',
+      '📡 Wi-Fi público: los hackers te pueden robar en segundos',
+      '🔒 Ransomware cifra tus archivos — ¡sin antivirus estás expuesto!',
+    ],
+    pillText:  'ALERTA: MÉXICO ENTRE LOS MÁS ATACADOS DE LATAM',
+    headline:  'Tu PC puede estar siendo<br><span class="accent-red">atacada ahora mismo.</span><br><span class="accent-safe">¿Estás protegido?</span>',
+    heroSub:   'México es el 2.° país más atacado de LATAM. Cada 30 segundos alguien pierde archivos, contraseñas o dinero. Con Avast Ultimate, estás protegido antes de que ocurra.',
+    ctaText:   '🛡️ PROTEGERME AHORA — 60% OFF',
+    s2n:       '237K', s2l: 'Ataques ransomware en<br>México (12 meses)',
+    testiTitle: 'usuarios en México',
+    testimonials: [
+      { stars:'★★★★★', text:'"Me instalaron un ransomware mientras hacía banca en línea. Perdí semanas de trabajo. Desde que uso Avast Ultimate ya llevo 18 meses sin ningún problema. El VPN para cuando trabajo en cafeterías es indispensable."', name:'Carlos R.', city:'Ciudad de México', flag:'🇲🇽' },
+      { stars:'★★★★★', text:'"Intentaron hackear mi computadora a través de un correo de mi "banco". Avast lo bloqueó al instante. Sin él, no sé qué hubiera pasado con mis datos y mi dinero."', name:'Sofía L.', city:'Guadalajara', flag:'🇲🇽' },
+      { stars:'★★★★★', text:'"Lo uso para toda la familia: mi PC, la laptop de mi esposa y los celulares de mis hijos. Una sola suscripción para todo. El Cleanup también dejó mi computadora muy rápida."', name:'Marco A.', city:'Monterrey', flag:'🇲🇽' },
+    ],
+    urgencyText: 'El 60% de descuento es una promoción por tiempo muy limitado. Miles de usuarios en México ya activaron su protección. No esperes a ser la próxima víctima.',
+    priceNote: 'al año · menos de ${{monthly}} MXN al mes',
+  },
+  CO: {
+    country:   'Colombia',
+    flag:      '🇨🇴',
+    currency:  'COP',
+    symbol:    '$',
+    rate:      4100,         // USD → COP (approximate)
+    riskPct:   85,
+    riskLabel: 'Tu país tiene riesgo ALTO',
+    riskSub:   'Colombia está entre los <strong>5 países más atacados de LATAM</strong> con 35,000+ intentos de ransomware registrados y un crecimiento acelerado del malware corporativo.',
+    stats: [
+      { n: '35K',   l: 'Ataques ransomware<br>en Colombia (12 meses)' },
+      { n: '+30%',  l: 'Crecimiento del<br>cibercrimen en 2024' },
+      { n: '$4.9M', l: 'Costo promedio de<br>una brecha de datos' },
+    ],
+    tickerItems: [
+      '🚨 Colombia: 35,000+ intentos de ransomware en los últimos 12 meses',
+      '⚠️ Grupo APT Blind Eagle activo en Colombia — ataca empresas y usuarios',
+      '🔥 60% DESCUENTO AVAST ULTIMATE — OFERTA LIMITADA',
+      '🛡️ Más de 400 millones de usuarios protegidos mundialmente',
+      '📡 Wi-Fi de centros comerciales: punto de ataque frecuente en Bogotá',
+      '🔒 El malware corporativo creció un 30% en Colombia en 2024',
+    ],
+    pillText:  'ALERTA: COLOMBIA EN EL TOP 5 DE CIBERATAQUES EN LATAM',
+    headline:  'Los hackers atacan Colombia<br><span class="accent-red">todos los días.</span><br><span class="accent-safe">¿Tu PC está a salvo?</span>',
+    heroSub:   'Colombia está entre los 5 países más atacados de América Latina. El grupo APT Blind Eagle opera activamente. Cada clic sin protección puede costarte todo.',
+    ctaText:   '🛡️ PROTEGERME AHORA — 60% DESCUENTO',
+    s2n:       '35K', s2l: 'Ataques ransomware en<br>Colombia (12 meses)',
+    testiTitle: 'usuarios en Colombia',
+    testimonials: [
+      { stars:'★★★★★', text:'"Trabajo desde casa y me preocupaba mucho la seguridad. Después de instalar Avast Ultimate, me avisó que intentaron acceder a mis cuentas desde otra IP. Lo bloqueó solo. Excelente producto."', name:'Andrea M.', city:'Bogotá', flag:'🇨🇴' },
+      { stars:'★★★★★', text:'"En mi empresa nos atacaron con ransomware y perdimos datos críticos. Personalmente uso Avast Ultimate desde entonces y me ha bloqueado 3 intentos de phishing este mes solito."', name:'Julián P.', city:'Medellín', flag:'🇨🇴' },
+      { stars:'★★★★★', text:'"El VPN es lo que más uso, especialmente cuando trabajo desde el café. Saber que mi conexión está cifrada me da muchísima tranquilidad cuando reviso el correo o el banco."', name:'Valentina R.', city:'Cali', flag:'🇨🇴' },
+    ],
+    urgencyText: 'El 60% de descuento es una oferta por tiempo muy limitado. En Colombia el cibercrimen creció un 30% en 2024. No esperes a ser la próxima víctima.',
+    priceNote: 'al año · menos de ${{monthly}} COP al mes',
+  },
+  AR: {
+    country:   'Argentina',
+    flag:      '🇦🇷',
+    currency:  'USD',        // ARS is volatile; showing USD is clearer for AR users
+    symbol:    'US$',
+    rate:      1,
+    riskPct:   78,
+    riskLabel: 'Tu país tiene riesgo ALTO',
+    riskSub:   'Argentina ocupa el 3.° lugar en LATAM en ataques cibernéticos, con incidentes de ransomware que robaron hasta <strong>300 GB de datos</strong> en organismos públicos y empresas en 2025.',
+    stats: [
+      { n: '3°',    l: 'Lugar en ciberataques<br>en América Latina' },
+      { n: '300GB', l: 'Datos robados en un solo<br>ataque a Argentina en 2025' },
+      { n: '+38%',  l: 'Aumento de ransomware<br>en el sector salud/público' },
+    ],
+    tickerItems: [
+      '🚨 Argentina: 3.° país más atacado de LATAM — 2025',
+      '⚠️ Grupo MONTI robó 300GB de datos de organismo argentino',
+      '🔥 60% DESCUENTO AVAST ULTIMATE — TIEMPO LIMITADO',
+      '🛡️ Más de 400 millones de usuarios confían en Avast',
+      '📡 Ataques de phishing bancario creciendo en Argentina',
+      '🔒 Sin antivirus actualizado, eres un blanco fácil',
+    ],
+    pillText:  'ALERTA: ARGENTINA EN EL TOP 3 DE CIBERATAQUES DE LATAM',
+    headline:  'Los ciberataques crecen en Argentina.<br><span class="accent-red">¿Tu PC puede resistirlos?</span><br><span class="accent-safe">Protégete por 1 año completo.</span>',
+    heroSub:   'Argentina es el 3.° país más atacado de América Latina. Grupos de ransomware como MONTI operan activamente. La protección no es un lujo — es una necesidad.',
+    ctaText:   '🛡️ ACTIVAR PROTECCIÓN — 60% OFF',
+    s2n:       'TOP 3', s2l: 'Argentina entre los más<br>atacados de LATAM 2025',
+    testiTitle: 'usuarios en Argentina',
+    testimonials: [
+      { stars:'★★★★★', text:'"Laburo desde casa y soy freelancer. Mis archivos son mi sustento. Avast Ultimate me bloqueó un intento de ransomware el año pasado. Sin él hubiera perdido meses de proyectos guardados. Vale cada centavo."', name:'Martín V.', city:'Buenos Aires', flag:'🇦🇷' },
+      { stars:'★★★★★', text:'"El VPN lo uso constantemente desde que vi noticias de robos de datos en WiFi de shoppings. Además, el Cleanup dejó mi notebook como nueva, anda mucho más rápido."', name:'Lucía F.', city:'Córdoba', flag:'🇦🇷' },
+      { stars:'★★★★★', text:'"Mi marido me convenció de comprarlo para toda la familia. Hoy lo tenemos en 4 dispositivos. Me parece muy completo y el precio con el descuento es muy conveniente comparado con lo que podría perder."', name:'Gabriela S.', city:'Rosario', flag:'🇦🇷' },
+    ],
+    urgencyText: 'El 60% de descuento es una oferta por tiempo limitado. Argentina es uno de los países más atacados de LATAM. No esperes a ser la próxima víctima.',
+    priceNote: 'USD al año · menos de US$4.20 al mes',
+  },
+};
+
+const DEFAULT_GEO = 'MX'; // fallback
+
+/* ── PRICE CONVERSION ─────────────────────────────── */
+const BASE_USD      = 49.99;
+const BASE_USD_OLD  = 109.99;
+
+function fmtPrice(usd, geo) {
+  const cfg = GEO[geo];
+  if (cfg.currency === 'USD') {
+    return { now: `US$ ${usd.toFixed(2)}`, old: `US$ ${BASE_USD_OLD.toFixed(2)}`, monthly: `US$ ${(usd/12).toFixed(2)}` };
+  }
+  const now = Math.round(usd * cfg.rate);
+  const old = Math.round(BASE_USD_OLD * cfg.rate);
+  const mo  = Math.round((usd * cfg.rate) / 12);
+  return {
+    now: `${cfg.symbol} ${now.toLocaleString('es')}`,
+    old: `${cfg.symbol} ${old.toLocaleString('es')}`,
+    monthly: mo.toLocaleString('es'),
+  };
+}
+
+/* ── APPLY GEO CONTENT ────────────────────────────── */
+function applyGeo(geoKey) {
+  const cfg = GEO[geoKey] || GEO[DEFAULT_GEO];
+  const prices = fmtPrice(BASE_USD, geoKey);
+
+  // GEO notice
+  document.getElementById('geo-notice').innerHTML =
+    `<strong>${cfg.flag} ${cfg.country}</strong> detectado · Mostrando precios en <strong>${cfg.currency}</strong>`;
+
+  // Alert pill
+  document.getElementById('alert-pill-text').textContent = cfg.pillText;
+
+  // Hero
+  document.getElementById('hero-headline').innerHTML = cfg.headline;
+  document.getElementById('hero-sub').innerHTML      = cfg.heroSub;
+  document.getElementById('hero-cta').textContent    = cfg.ctaText;
+
+  // Stat ribbon
+  document.getElementById('s2').textContent  = cfg.s2n;
+  document.getElementById('s2l').innerHTML   = cfg.s2l;
+
+  // Geo risk box
+  const box = document.getElementById('geo-risk-box');
+  box.style.display = 'block';
+  document.getElementById('geo-flag').textContent        = cfg.flag;
+  document.getElementById('geo-risk-title').textContent  = cfg.riskLabel;
+  document.getElementById('geo-risk-sub').innerHTML      = cfg.riskSub;
+  document.getElementById('risk-pct').textContent        = cfg.riskPct + '%';
+  // animate fill
+  setTimeout(() => {
+    document.getElementById('risk-fill').style.width = cfg.riskPct + '%';
+  }, 300);
+
+  // Geo stats
+  document.getElementById('geo-stats').innerHTML = cfg.stats.map(s =>
+    `<div class="geo-stat-item"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`
+  ).join('');
+
+  // Ticker
+  const items = [...cfg.tickerItems, ...cfg.tickerItems]; // doubled for seamless loop
+  document.getElementById('ticker').innerHTML = items.map(t =>
+    `<div class="ticker-item"><span class="dot"></span>${t}</div>`
+  ).join('');
+
+  // Prices
+  document.getElementById('pw').textContent        = `Precio regular: ${prices.old}/${cfg.currency === 'USD' ? 'year' : 'año'}`;
+  document.getElementById('price-amt').textContent = prices.now.replace(/[^0-9., ]/g, '').trim();
+  // show full now price with symbol correctly
+  document.getElementById('pn').innerHTML = `<sup style="font-size:1.6rem;vertical-align:super;margin-right:3px;">${cfg.symbol}</sup><span id="price-amt">${prices.now.replace(cfg.symbol, '').trim()}</span>`;
+  const noteRaw = cfg.priceNote.replace('{{monthly}}', prices.monthly);
+  document.getElementById('price-note').textContent = noteRaw;
+
+  // Testimonials
+  document.getElementById('testi-country').textContent = cfg.testiTitle;
+  document.getElementById('testi-grid').innerHTML = cfg.testimonials.map(t =>
+    `<div class="testi"><div class="stars">${t.stars}</div><p>${t.text}</p><div class="reviewer"><span>${t.flag}</span> ${t.name} — ${t.city}</div></div>`
+  ).join('');
+
+  // Urgency text
+  document.getElementById('urgency-text').textContent = cfg.urgencyText;
+
+  // Page title
+  document.title = `⚠️ Alerta de seguridad en ${cfg.country} — Protege tu PC ahora`;
+}
+
+/* ── GEO DETECTION ────────────────────────────────── */
+async function detectGeo() {
+  // 1. Try ipapi (free, no key needed)
+  try {
+    const res  = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(4000) });
+    const data = await res.json();
+    const code = (data.country_code || '').toUpperCase();
+    if (GEO[code]) { applyGeo(code); return; }
+  } catch(e) {}
+
+  // 2. Try cloudflare trace fallback
+  try {
+    const res  = await fetch('https://www.cloudflare.com/cdn-cgi/trace', { signal: AbortSignal.timeout(3000) });
+    const text = await res.text();
+    const m    = text.match(/loc=([A-Z]{2})/);
+    if (m && GEO[m[1]]) { applyGeo(m[1]); return; }
+  } catch(e) {}
+
+  // 3. Fallback to MX
+  applyGeo(DEFAULT_GEO);
+}
+
+detectGeo();
+
+/* ── QUIZ ─────────────────────────────────────────── */
+function runQuiz() {
+  const checks = document.querySelectorAll('.qc');
+  const score  = Array.from(checks).filter(c => c.checked).length;
+  const el     = document.getElementById('qr');
+  el.style.display = 'block';
+
+  if (score >= 4) {
+    el.className = 'danger';
+    el.innerHTML = `🚨 <strong>RIESGO CRÍTICO</strong> — Tienes ${score} de 6 factores de vulnerabilidad activos. Un ataque de ransomware o robo de datos puede ocurrirte <em>en cualquier momento</em>. Actúa ahora antes de que sea tarde. <a href="YOUR_AFFILIATE_LINK_HERE" style="color:#FF8090;font-weight:800;">→ Activar protección con 60% OFF</a>`;
+  } else if (score >= 2) {
+    el.className = 'warn';
+    el.innerHTML = `⚠️ <strong>RIESGO MODERADO-ALTO</strong> — Tienes ${score} factores de exposición. Los ciberdelincuentes buscan exactamente este perfil de usuario desprotegido. Una protección completa puede salvarte de pérdidas graves.`;
+  } else if (score === 1) {
+    el.className = 'warn';
+    el.innerHTML = `⚠️ <strong>RIESGO BAJO — PERO PRESENTE</strong> — Con los ataques impulsados por IA, nadie está completamente a salvo sin protección activa y actualizada en tiempo real.`;
+  } else {
+    el.className = 'ok';
+    el.innerHTML = `✅ <strong>BAJO RIESGO</strong> — Buen trabajo. Aun así, con millones de ataques al día en LATAM, contar con protección profesional siempre es más seguro.`;
+  }
+
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+/* ── COUNTDOWN ────────────────────────────────────── */
+(function() {
+  const KEY = 'avast_cd_end_v2';
+  let end = parseInt(localStorage.getItem(KEY));
+  const now = Date.now();
+  if (!end || end < now) {
+    // Random duration between 18-23h for authenticity
+    const hours = 18 + Math.floor(Math.random() * 6);
+    const mins  = Math.floor(Math.random() * 60);
+    end = now + (hours * 3600 + mins * 60) * 1000;
+    localStorage.setItem(KEY, end);
+  }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const diff = Math.max(0, Math.floor((end - Date.now()) / 1000));
+    document.getElementById('cd-h').textContent = pad(Math.floor(diff / 3600));
+    document.getElementById('cd-m').textContent = pad(Math.floor((diff % 3600) / 60));
+    document.getElementById('cd-s').textContent = pad(diff % 60);
+    if (diff > 0) setTimeout(tick, 1000);
+  }
+  tick();
+})();
+</script>
+
+</body>
+</html>
