@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="page-title">⚠️ Alerta de seguridad — Protege tu PC ahora</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/32х32 bobik.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -686,7 +687,7 @@ footer a { color: var(--muted); }
 <!-- ══ TICKER ══ -->
 <div class="ticker-wrap">
   <div class="ticker-inner" id="ticker">
-    <!-- заполняется JS -->
+    <!-- filled by JS -->
   </div>
 </div>
 
@@ -769,7 +770,7 @@ footer a { color: var(--muted); }
     </div>
 
     <div class="geo-stats" id="geo-stats">
-      <!-- заполняется JS -->
+      <!-- filled by JS -->
     </div>
   </div>
 
@@ -872,7 +873,7 @@ footer a { color: var(--muted); }
   <h2 class="section-title">Lo que dicen usuarios en <em id="testi-country">Latinoamérica</em></h2>
 
   <div class="testi-grid" id="testi-grid">
-    <!-- заполняется JS -->
+    <!-- filled by JS -->
   </div>
 
   <!-- TRUST BAR -->
@@ -911,9 +912,6 @@ footer a { color: var(--muted); }
   <p>Avast, Avast Ultimate y los logos relacionados son marcas registradas de Gen Digital Inc.</p>
 </footer>
 
-<!-- ══════════════════════════════════════════════════
-     JAVASCRIPT — GEO DETECTION + CONTENT SWAP
-══════════════════════════════════════════════════ -->
 <script>
 /* ── GEO DATA CONFIG ──────────────────────────────── */
 const GEO = {
@@ -958,32 +956,32 @@ const GEO = {
     flag:      '🇨🇴',
     currency:  'COP',
     symbol:    '$',
-    rate:      3704,
+    rate:      3809.10,  // Actualizado: 3809.10 COP por 1 USD
     riskPct:   85,
     riskLabel: 'Tu país tiene riesgo ALTO',
-    riskSub:   'Colombia está entre los <strong>5 países más atacados de LATAM</strong> con 35,000+ intentos de ransomware registrados y un crecimiento acelerado del malware corporativo.',
+    riskSub:   'Colombia está entre los <strong>5 países más atacados de LATAM</strong> con más de 35,000 intentos de ransomware registrados y un crecimiento acelerado del malware.',
     stats: [
-      { n: '35K',   l: 'Ataques ransomware<br>en Colombia (12 meses)' },
+      { n: '35K+',  l: 'Ataques ransomware<br>en Colombia (2025)' },
       { n: '+30%',  l: 'Crecimiento del<br>cibercrimen en 2024' },
       { n: '$4.9M', l: 'Costo promedio de<br>una brecha de datos' },
     ],
     tickerItems: [
-      '🚨 Colombia: 35,000+ intentos de ransomware en los últimos 12 meses',
-      '⚠️ Grupo APT Blind Eagle activo en Colombia — ataca empresas y usuarios',
-      '🔥 60% DESCUENTO AVAST ULTIMATE — OFERTA LIMITADA',
-      '🛡️ Más de 400 millones de usuarios protegidos mundialmente',
-      '📡 Wi-Fi de centros comerciales: punto de ataque frecuente en Bogotá',
+      '🚨 Colombia: +35.000 ataques de ransomware en el último año',
+      '⚠️ Grupo APT Blind Eagle opera activamente en Colombia',
+      '🔥 60% DESCUENTO AVAST ULTIMATE — OFERTA POR TIEMPO LIMITADO',
+      '🛡️ Más de 400 millones de usuarios confían en Avast',
+      '📡 Wi-Fi público en centros comerciales: punto de ataque frecuente',
       '🔒 El malware corporativo creció un 30% en Colombia en 2024',
     ],
-    pillText:  'ALERTA: COLOMBIA EN EL TOP 5 DE CIBERATAQUES EN LATAM',
+    pillText:  'ALERTA: COLOMBIA EN EL TOP 5 DE CIBERATAQUES LATAM',
     headline:  'Los hackers atacan Colombia<br><span class="accent-red">todos los días.</span><br><span class="accent-safe">¿Tu PC está a salvo?</span>',
     heroSub:   'Colombia está entre los 5 países más atacados de América Latina. El grupo APT Blind Eagle opera activamente. Cada clic sin protección puede costarte todo.',
-    ctaText:   '🛡️ PROTEGERME AHORA — 60% DESCUENTO',
-    s2n:       '35K', s2l: 'Ataques ransomware en<br>Colombia (12 meses)',
+    ctaText:   '🛡️ PROTEGERME AHORA — 60% DTO',
+    s2n:       '35K+', s2l: 'Ataques ransomware en<br>Colombia (2025)',
     testiTitle: 'usuarios en Colombia',
     testimonials: [
       { stars:'★★★★★', text:'"Trabajo desde casa y me preocupaba mucho la seguridad. Después de instalar Avast Ultimate, me avisó que intentaron acceder a mis cuentas desde otra IP. Lo bloqueó solo. Excelente producto."', name:'Andrea M.', city:'Bogotá', flag:'🇨🇴' },
-      { stars:'★★★★★', text:'"En mi empresa nos atacaron con ransomware y perdimos datos críticos. Personalmente uso Avast Ultimate desde entonces y me ha bloqueado 3 intentos de phishing este mes solito."', name:'Julián P.', city:'Medellín', flag:'🇨🇴' },
+      { stars:'★★★★★', text:'"En mi empresa nos atacaron con ransomware y perdimos datos críticos. Personalmente uso Avast Ultimate desde entonces y me ha bloqueado 3 intentos de phishing este mes."', name:'Julián P.', city:'Medellín', flag:'🇨🇴' },
       { stars:'★★★★★', text:'"El VPN es lo que más uso, especialmente cuando trabajo desde el café. Saber que mi conexión está cifrada me da muchísima tranquilidad cuando reviso el correo o el banco."', name:'Valentina R.', city:'Cali', flag:'🇨🇴' },
     ],
     urgencyText: 'El 60% de descuento es una oferta por tiempo muy limitado. En Colombia el cibercrimen creció un 30% en 2024. No esperes a ser la próxima víctima.',
@@ -1018,9 +1016,9 @@ const GEO = {
     s2n:       'TOP 3', s2l: 'Argentina entre los más<br>atacados de LATAM 2025',
     testiTitle: 'usuarios en Argentina',
     testimonials: [
-      { stars:'★★★★★', text:'"Laburo desde casa y soy freelancer. Mis archivos son mi sustento. Avast Ultimate me bloqueó un intento de ransomware el año pasado. Sin él hubiera perdido meses de proyectos guardados. Vale cada centavo."', name:'Martín V.', city:'Buenos Aires', flag:'🇦🇷' },
-      { stars:'★★★★★', text:'"El VPN lo uso constantemente desde que vi noticias de robos de datos en WiFi de shoppings. Además, el Cleanup dejó mi notebook como nueva, anda mucho más rápido."', name:'Lucía F.', city:'Córdoba', flag:'🇦🇷' },
-      { stars:'★★★★★', text:'"Mi marido me convenció de comprarlo para toda la familia. Hoy lo tenemos en 4 dispositivos. Me parece muy completo y el precio con el descuento es muy conveniente comparado con lo que podría perder."', name:'Gabriela S.', city:'Rosario', flag:'🇦🇷' },
+      { stars:'★★★★★', text:'"Laburo desde casa y soy freelancer. Mis archivos son mi sustento. Avast Ultimate me bloqueó un intento de ransomware el año pasado. Sin él hubiera perdido meses de proyectos guardados."', name:'Martín V.', city:'Buenos Aires', flag:'🇦🇷' },
+      { stars:'★★★★★', text:'"El VPN lo uso constantemente desde que vi noticias de robos de datos en WiFi de shoppings. Además, el Cleanup dejó mi notebook como nueva."', name:'Lucía F.', city:'Córdoba', flag:'🇦🇷' },
+      { stars:'★★★★★', text:'"Mi marido me convenció de comprarlo para toda la familia. Hoy lo tenemos en 4 dispositivos. Me parece muy completo y el precio con el descuento es muy conveniente."', name:'Gabriela S.', city:'Rosario', flag:'🇦🇷' },
     ],
     urgencyText: 'El 60% de descuento es una oferta por tiempo limitado. Argentina es uno de los países más atacados de LATAM. No esperes a ser la próxima víctima.',
     priceNote: 'ARS al año · menos de ${{monthly}} ARS al mes',
@@ -1041,14 +1039,13 @@ function fmtPrice(usd, geo) {
 
   function fmt(n) {
     if (cfg.currency === 'COP') {
-      // $199.000 COP — точка как разделитель тысяч
+      // Formato COP: puntos como separador de miles y sufijo COP
       return '$' + n.toLocaleString('es-CO').replace(/,/g, '.') + ' COP';
     }
     if (cfg.currency === 'ARS') {
-      // $69.450 ARS
       return '$' + n.toLocaleString('es-AR').replace(/,/g, '.') + ' ARS';
     }
-    // MXN: $2,099 MXN
+    // MXN
     return '$' + n.toLocaleString('es-MX') + ' MXN';
   }
 
@@ -1070,7 +1067,7 @@ function applyGeo(geoKey) {
   const cfg = GEO[geoKey] || GEO[DEFAULT_GEO];
   const prices = fmtPrice(BASE_USD, geoKey);
 
-  // GEO notice
+  // Geo notice
   document.getElementById('geo-notice').innerHTML =
     `<strong>${cfg.flag} ${cfg.country}</strong> detectado · Mostrando precios en <strong>${cfg.currency}</strong>`;
 
@@ -1093,7 +1090,6 @@ function applyGeo(geoKey) {
   document.getElementById('geo-risk-title').textContent  = cfg.riskLabel;
   document.getElementById('geo-risk-sub').innerHTML      = cfg.riskSub;
   document.getElementById('risk-pct').textContent        = cfg.riskPct + '%';
-  // animate fill
   setTimeout(() => {
     document.getElementById('risk-fill').style.width = cfg.riskPct + '%';
   }, 300);
@@ -1104,7 +1100,7 @@ function applyGeo(geoKey) {
   ).join('');
 
   // Ticker
-  const items = [...cfg.tickerItems, ...cfg.tickerItems]; // doubled for seamless loop
+  const items = [...cfg.tickerItems, ...cfg.tickerItems];
   document.getElementById('ticker').innerHTML = items.map(t =>
     `<div class="ticker-item"><span class="dot"></span>${t}</div>`
   ).join('');
@@ -1146,7 +1142,7 @@ async function detectGeo() {
     if (m && GEO[m[1]]) { applyGeo(m[1]); return; }
   } catch(e) {}
 
-  // 3. Fallback to MX
+  // 3. Fallback to default (Argentina)
   applyGeo(DEFAULT_GEO);
 }
 
@@ -1182,7 +1178,6 @@ function runQuiz() {
   let end = parseInt(localStorage.getItem(KEY));
   const now = Date.now();
   if (!end || end < now) {
-    // Random duration between 18-23h for authenticity
     const hours = 18 + Math.floor(Math.random() * 6);
     const mins  = Math.floor(Math.random() * 60);
     end = now + (hours * 3600 + mins * 60) * 1000;
